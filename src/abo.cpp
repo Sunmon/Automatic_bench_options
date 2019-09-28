@@ -16,11 +16,13 @@ int main(int argc, char* argv[])
 {
     //get docker image name
     string cmd = "docker run ";
-    const char* IMG_NAME = argv[argc-1];
+    const char* IMG_NAME;
+    argc == 1 ? IMG_NAME = "" : IMG_NAME = argv[argc-1];
 
     cmd+= IMG_NAME;
 
     const char *cmdptr = cmd.c_str();    //str을 char*로 변환
     system(cmdptr);
+
     return 0;
 }
