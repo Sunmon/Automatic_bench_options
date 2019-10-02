@@ -5,6 +5,7 @@
  * 테스트한 결과를 file로 작성
  * Usage: $abo [testing image name] [run bench option] [output name]
  * Author: Sun-Jung Kim
+ * EXAMPLE: ./abo hpl:benchtest mpirun --allow-run-as-root -np 4 ./hpl_bench
  **/
 
 
@@ -24,27 +25,21 @@ int main(int argc, char* argv[])
     string RUN = "docker run -dit --rm --name ";
 // mpirun --allow-run-as-root -np 4 ./xhpl";
     const string IMG = argv[1];
-    const string NAME = " benchtest";
+    const string NAME = "hpl";
     const string UPDATE = "docker update ";
     const string CPUSET = " --cpuset-cpus=0-";
     const string CPUPERIOD = " --cpu-period=";
     const string CPUQUOTA = " --cpu-quota=";
     string EXEC = "docker exec " + NAME + " ";
     string OUTPUT[2];
-    //TODO: OUPTPUT[0]바꾸기
-    OUTPUT[CONTAINER] = NAME+ ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat";
-    OUTPUT[HOST] = argv[argc-1];
+    OUTPUT[CONTAINER] = NAME+ ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.out";
+    OUTPUT[HOST] = "../output/" + NAME;
+    string CPU_NUM[4] = {"0", "0,2", "0,2,4", "0,2,4,6"};
 
-
-    for(int i = 2; i<argc-1; i++)
+    for(int i = 2; i<argc; i++)
     {
         EXEC = EXEC + string(argv[i]) + " ";
     }
-
-    //get image name to run
-    // const char* IMG_NAME;
-    // argc == 1 ? IMG_NAME = "" : IMG_NAME = argv[argc-1];
-
 
     // RUN Container
     RUN = RUN + NAME + " " + IMG;
@@ -53,39 +48,47 @@ int main(int argc, char* argv[])
 
 
     //copy option to benchmark
-    system("docker cp ~/Desktop/HPL/HPL.dat benchtest:/AddedFiles/hpl-2.3/bin/x86_64/");
+    string cp = "docker cp ~/Desktop/HPL/HPL.dat " + NAME+":/AddedFiles/hpl-2.3/bin/x86_64";
+    command = cp.c_str();
+    system(command);
     //wait for run container
     // sleep(3);
+    // return 0;
+    system(("mkdir "+ OUTPUT[HOST]).c_str());
 
     //TODO: 숫자 바꾸기. cpu 랑 period랑. 
     // RUN benchmarking
-    // for(int cpu = 3; cpu<4; cpu++)
-    // {
-    //     for(int period = 500; period <=1000; period += 100)
-    //     {
+    for(int cpu = 3; cpu<4; cpu++)
+    {
+            // int period = 1000;
+            // int cpu = 3;
 
-            int period = 1000;
-            int cpu = 3;
 
-            string mkdir = "mkdir " + OUTPUT[HOST] + "/cpu_" + to_string(cpu);
-            command = mkdir.c_str();
-            system(command);
+
+        //make saving directory
+        string dir = OUTPUT[HOST] + "/cpu_" + CPU_NUM[cpu];
+        string mkdir = "mkdir " + dir;
+        command = mkdir.c_str();
+        system(command);
+
+        for(int period = 10000; period <=100000; period += 10000)
+        {
+
             //set cpu option
-            string update = UPDATE + CPUSET + to_string(cpu) + CPUPERIOD + to_string(period) + CPUQUOTA + to_string(period) +  NAME;
-            cout << update << endl;
-
+            string update = UPDATE + CPUSET + CPU_NUM[cpu] + CPUPERIOD + to_string(period) + CPUQUOTA + to_string(period) +  " " +NAME;
             command = update.c_str();
             system(command);
 
             //run benchmarking
-            // command = EXEC.c_str();
-            // system(command);
+            command = EXEC.c_str();
+            system(command);
 
             //get benchmark results
-            // string temp = "docker cp " + OUTPUT[CONTAINER] + " " + OUTPUT[HOST];
-            string temp = "docker cp " + OUTPUT[CONTAINER] + " " + OUTPUT[HOST] + "/" + "cpu_"+to_string(cpu)+ "/period_"+to_string(period);
-            command = temp.c_str();
-            cout << command <<endl;
+            string result = "docker cp " + OUTPUT[CONTAINER] + " " + dir + "/period_"+to_string(period);
+
+            // cout << result << endl;
+            command = result.c_str();
+
             // string temp = "docker cp benchtest:/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat ./hpl_bench/";
             // command = temp.c_str();
             system(command);
@@ -93,17 +96,15 @@ int main(int argc, char* argv[])
 
             //NOTE: 안기다리고 그냥 결과 나오면 다음꺼가 실행되기때문에 sleep 없어도 괜찮다!
             cout << ">>>>>>>>>>>>>>>>>\t complete cpu: " << cpu << "period:" << period << "\n";
-            system("docker stop benchtest");
-            return 0;
-
+            // system("docker stop benchtest");
             //wait until benchmark complete
             // sleep(20);
 
           
-    //     }
-    // }
+        }
+    }
 
-    // //TODO: exit
+    // //TODO: docker stop
     return 0;
 }
 

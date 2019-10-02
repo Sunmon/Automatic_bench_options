@@ -1,0 +1,2 @@
+./abo hpl mpirun --allow-run-as-root --use-hwthread-cpus -np 4 xhpl
+
