@@ -7,11 +7,14 @@
  * Author: Sun-Jung Kim
  **/
 
+
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
 // #include <Windows.h>
 #include <unistd.h>
+#define CONTAINER 0
+#define HOST 1
 
 using namespace std;
 
@@ -28,8 +31,9 @@ int main(int argc, char* argv[])
     const string CPUQUOTA = " --cpu-quota=";
     string EXEC = "docker exec " + NAME + " ";
     string OUTPUT[2];
-    OUTPUT[0] = NAME+ ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.out";
-    OUTPUT[1] = argv[argc-1];
+    //TODO: OUPTPUT[0]바꾸기
+    OUTPUT[CONTAINER] = NAME+ ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat";
+    OUTPUT[HOST] = argv[argc-1];
 
 
     for(int i = 2; i<argc-1; i++)
@@ -41,37 +45,61 @@ int main(int argc, char* argv[])
     // const char* IMG_NAME;
     // argc == 1 ? IMG_NAME = "" : IMG_NAME = argv[argc-1];
 
+
     // RUN Container
     RUN = RUN + NAME + " " + IMG;
-    const char *COMMAND = RUN.c_str();
-    system(COMMAND);
+    const char *command = RUN.c_str();
+    system(command);
 
 
-    // //TODO: 숫자 바꾸기. cpu 랑 period랑. 
-    // // RUN benchmarking
+    //copy option to benchmark
+    system("docker cp ~/Desktop/HPL/HPL.dat benchtest:/AddedFiles/hpl-2.3/bin/x86_64/");
+    //wait for run container
+    // sleep(3);
+
+    //TODO: 숫자 바꾸기. cpu 랑 period랑. 
+    // RUN benchmarking
     // for(int cpu = 3; cpu<4; cpu++)
     // {
     //     for(int period = 500; period <=1000; period += 100)
     //     {
 
-    //         //set cpu option
-    //         string update = UPDATE + CPUSET + to_string(cpu) + CPUPERIOD + to_string(period) + NAME;
-    //         COMMAND = update.c_str();
-    //         system(COMMAND);
+            int period = 1000;
+            int cpu = 3;
 
-    //         //run benchmarking
-    //         COMMAND = EXEC.c_str();
-    //         system(COMMAND);
+            string mkdir = "mkdir " + OUTPUT[HOST] + "/cpu_" + to_string(cpu);
+            command = mkdir.c_str();
+            system(command);
+            //set cpu option
+            string update = UPDATE + CPUSET + to_string(cpu) + CPUPERIOD + to_string(period) + CPUQUOTA + to_string(period) +  NAME;
+            cout << update << endl;
+
+            command = update.c_str();
+            system(command);
+
+            //run benchmarking
+            // command = EXEC.c_str();
+            // system(command);
+
+            //get benchmark results
+            // string temp = "docker cp " + OUTPUT[CONTAINER] + " " + OUTPUT[HOST];
+            string temp = "docker cp " + OUTPUT[CONTAINER] + " " + OUTPUT[HOST] + "/" + "cpu_"+to_string(cpu)+ "/period_"+to_string(period);
+            command = temp.c_str();
+            cout << command <<endl;
+            // string temp = "docker cp benchtest:/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat ./hpl_bench/";
+            // command = temp.c_str();
+            system(command);
 
 
+            //NOTE: 안기다리고 그냥 결과 나오면 다음꺼가 실행되기때문에 sleep 없어도 괜찮다!
+            cout << ">>>>>>>>>>>>>>>>>\t complete cpu: " << cpu << "period:" << period << "\n";
+            system("docker stop benchtest");
+            return 0;
 
+            //wait until benchmark complete
+            // sleep(20);
 
-    //         //wait until benchmark complete
-    //         sleep(20);
-
-    //         //get benchmark results
-    //         COMMAND = ("docker cp " + OUTPUT[1] + " " + OUTPUT[2] + "/" + "cpu_"+to_string(cpu)+ "__peiod_"+to_string(period)).c_str();
-    //         system(COMMAND);
+          
     //     }
     // }
 
