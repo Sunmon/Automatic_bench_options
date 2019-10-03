@@ -10,7 +10,9 @@ using namespace std;
 string IMG;
 string NAME;
 string OUTPUT[2];
-string NUM_CPU[4] = {"0", "0,2", "0,2,4", "0,2,4,6"};
+// string NUM_CPU[4] = {"0", "0,2", "0,2,4", "0,2,4,6"};
+string NUM_CPU[4] = {"0", "0,1", "0,1,2", "0,1,2,3"};
+
 string EXEC;
 // const char* command;
 
