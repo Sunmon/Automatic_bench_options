@@ -12,8 +12,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <cstring>
-// #include <Windows.h>
-#include <unistd.h>
+#include <unistd.h>     //sleep()
 #define CONTAINER 0
 #define HOST 1
 
@@ -23,9 +22,8 @@ int main(int argc, char* argv[])
 {
     //set docker command
     string RUN = "docker run -dit --rm --name ";
-// mpirun --allow-run-as-root -np 4 ./xhpl";
     const string IMG = argv[1];
-    const string NAME = "hpl";
+    const string NAME = IMG;
     const string UPDATE = "docker update ";
     const string CPUSET = " --cpuset-cpus=0-";
     const string CPUPERIOD = " --cpu-period=";
@@ -51,19 +49,18 @@ int main(int argc, char* argv[])
     string cp = "docker cp ~/Desktop/HPL/HPL.dat " + NAME+":/AddedFiles/hpl-2.3/bin/x86_64";
     command = cp.c_str();
     system(command);
-    //wait for run container
-    // sleep(3);
-    // return 0;
     system(("mkdir "+ OUTPUT[HOST]).c_str());
 
+    //TODO: hpl은 프로세서 수 늘리면 HPL.dat도 고쳐야 함.
     //TODO: 숫자 바꾸기. cpu 랑 period랑. 
     // RUN benchmarking
-    for(int cpu = 3; cpu<4; cpu++)
-    {
+    // for(int cpu = 3; cpu<4; cpu++)
+    // {
             // int period = 1000;
             // int cpu = 3;
 
 
+        int cpu = 0;
 
         //make saving directory
         string dir = OUTPUT[HOST] + "/cpu_" + CPU_NUM[cpu];
@@ -101,10 +98,13 @@ int main(int argc, char* argv[])
             // sleep(20);
 
           
-        }
-    }
+        // }
+    // }
 
     // //TODO: docker stop
+    string stop = "docker stop " + NAME;
+    command = stop.c_str();
+    system(command);
     return 0;
 }
 
@@ -112,7 +112,3 @@ int main(int argc, char* argv[])
 
 //만들어진 컨테이너 자원도 바꿀 수 있다.
 //https://jungwoon.github.io/docker/2019/01/13/Docker-6/
-
-
-//cpuset = 0-0 일때, 벤치 한 번 돌리는데 걸리는 시간: 21분 57초
-//cpuset = 0-3 일때, 벤치 한 번 돌리는데 걸리는 시간: 11초
