@@ -10,7 +10,7 @@ using namespace std;
 string IMG;
 string NAME;
 string OUTPUT[2];
-string NUM_CPU[4] = {"0", "0,2", "0,2,4", "0,2,4,8"};
+string NUM_CPU[4] = {"0", "0,2", "0,2,4", "0,2,4,6"};
 string EXEC;
 // const char* command;
 
@@ -22,16 +22,31 @@ void command(string& strcmd)
 
 }
 
+void makeDir(string dir)
+{
+    string mkdir = "mkdir " + dir;
+    command(mkdir);
+}
+
 
 // set benchmark output directory in container
 // ex: /AddedFiles/hpl-2.3/bin/x86_64/HPL.out
 void initOutputDir()
 {
-    cout << " output directory in container: ";
+    cout << "Output directory in container\n  >>> ";
     string temp;
-    cin >> temp;
+    getline(cin, temp);
+    // cin.ignore();
     OUTPUT[CONTAINER] = NAME + ":" + temp;
     OUTPUT[HOST] = "../output/" + NAME;
+
+    //make output dir in host
+    makeDir(OUTPUT[HOST]);
+
+
+    // cout << endl << endl;
+    // cout << OUTPUT[CONTAINER] << endl;
+    // cout << OUTPUT[HOST] << endl;
 }
 
 
@@ -39,10 +54,11 @@ void initOutputDir()
 // ex: mpirun --allow-run-as-root -np 4 xhpl
 void initExecCMD()
 {
-    cout << " running exec command with: ";
+    cout << "Running exec command with\n  >>> ";
     string temp;
     getline(cin, temp);
     EXEC = "docker exec " + NAME + " " + temp;
+    // cout << EXEC;
 }
 
 
@@ -53,11 +69,6 @@ void initArgs(int argc, char* argv[])
 }
 
 
-void createOutputDir(string mkdir)
-{
-    // string mkdir = OUTPUT[HOST];
-    command(mkdir);
-}
 
 
 //NOTE: only for "HPL BENCHMARK"
@@ -70,7 +81,7 @@ void copyBenchOption()
 
 void runContainer()
 {
-    string RUN = "docker run -dit --rm --name " + NAME;
+    string RUN = "docker run -dit --rm --name " + NAME + " " + IMG;
     command(RUN);
 }
 
@@ -80,9 +91,9 @@ void updateContainer(int cpu, int period)
     string s_period = to_string(period);
     string s_quota = to_string((period/2));
     string update = 
-        "docker update --cpuset-cpus=" + NUM_CPU[cpu] +
-        "--cpu-period=" + s_period +
-        "--cpu-quota=" + s_quota +
+        "docker update --cpuset-cpus=" + NUM_CPU[cpu] + " "
+        "--cpu-period=" + s_period + " " +
+        "--cpu-quota=" + s_quota + 
         " " + NAME;
         
     command(update);
@@ -113,19 +124,18 @@ int main(int argc, char* argv[])
     initArgs(argc, argv);
     initOutputDir();
     initExecCMD();
-    copyBenchOption();  //NOTE: only for HPL bench 
-    createOutputDir(OUTPUT[HOST]);
     
     //run container
     runContainer();
+    copyBenchOption();  //NOTE: only for HPL bench 
 
-    //update container
-    //TODO: cpu set 
-    // for(int cpu = 0; cpu<4; cpu++)
-    // {
+    // //update container
+    // //TODO: cpu set 
+    // // for(int cpu = 0; cpu<4; cpu++)
+    // // {
 
-        int cpu = 3;
-        createOutputDir("mkdir " + OUTPUT[HOST] + "/" + NUM_CPU[cpu]);
+        int cpu = atoi(argv[2]);
+        makeDir(OUTPUT[HOST] + "/" + NUM_CPU[cpu]);
         for(int period = 10000; period <= 100000; period += 10000)
         {
             updateContainer(cpu, period);
@@ -135,6 +145,6 @@ int main(int argc, char* argv[])
 
     // }
 
-    //stop container
+    // //stop container
     stopContainer();
 }

@@ -1,2 +1,9 @@
-./abo hpl mpirun --allow-run-as-root --use-hwthread-cpus -np 4 xhpl
+./abo hpl
+
+
+./ hplBench hpl
+
+/AddedFiles/hpl-2.3/bin/x86_64/HPL.out
+
+mpirun --allow-run-as-root --use-hwthread-cpus -np 4 xhpl
 
