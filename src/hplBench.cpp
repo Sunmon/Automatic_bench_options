@@ -71,7 +71,8 @@ void initExecCMD()
 void initContainer(int argc, char* argv[])
 {
     IMG = argv[1];
-    NAME = IMG;
+    NAME = "hpl";
+    // NAME = IMG;
 }
 
 
