@@ -134,21 +134,20 @@ int main(int argc, char* argv[])
     
     //run container
     runContainer();
-    copyBenchOption(1);  //NOTE: only for HPL bench 
 
     //update container & run benchmark
-    for(int cpu = 0; cpu<CORE; cpu++)
-    {
-        makeDir(OUTPUT[HOST] + "/" + NUM_CPU[cpu]);
+    // for(int cpu = 0; cpu<CORE; cpu++)
+    // {
+        // makeDir(OUTPUT[HOST] + "/" + NUM_CPU[cpu]);
         for(int period = 100000; period <= 1000000; period += 100000)
         {
-            updateContainer(cpu, period, period/2);
-            sleep(100);
+            updateContainer(0, period, period/2);
+            sleep(360);
             // execContainer();
             // saveOutputToHost(cpu, period);
-            cout << ">>>\tfinish  cpu: " << cpu << " period: " << period <<"\t<<<\n";
+            // cout << ">>>\tfinish  cpu: " << cpu << " period: " << period <<"\t<<<\n";
         }
-    }
+    // }
 
     //stop container
     stopContainer();
