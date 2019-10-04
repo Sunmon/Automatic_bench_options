@@ -77,17 +77,17 @@ void initArgs(int argc, char* argv[])
 // copy running option
 void copyBenchOption(int cpu)
 {
-    string cp;
-    switch(cpu)
-    {
-        case 0 : cp = "docker cp ~/Desktop/HPL/HPL_0.dat "; break;
-        case 1 : cp = "docker cp ~/Desktop/HPL/HPL_1.dat "; break;
-        case 2 : cp = "docker cp ~/Desktop/HPL/HPL_2.dat "; break;
-        case 3 : cp = "docker cp ~/Desktop/HPL/HPL_3.dat "; break;
-        default: cp = "docker cp ~/Desktop/HPL/HPL.dat "; 
-    }
-    cp = cp + NAME + ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat";
-    // string cp = "docker cp ~/Desktop/HPL/HPL.dat " + NAME+":/AddedFiles/hpl-2.3/bin/x86_64";
+    // string cp;
+    // switch(cpu)
+    // {
+        // case 0 : cp = "docker cp ~/Desktop/HPL/HPL_0.dat "; break;
+        // case 1 : cp = "docker cp ~/Desktop/HPL/HPL_1.dat "; break;
+        // case 2 : cp = "docker cp ~/Desktop/HPL/HPL_2.dat "; break;
+        // case 3 : cp = "docker cp ~/Desktop/HPL/HPL_3.dat "; break;
+        // default: cp = "docker cp ~/Desktop/HPL/HPL.dat "; 
+    // }
+    // cp = cp + NAME + ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat";
+    string cp = "docker cp ~/Desktop/HPL/HPL.dat " + NAME+":/AddedFiles/hpl-2.3/bin/x86_64";
     cout << cp << endl;
     command(cp);
 }
@@ -145,11 +145,11 @@ int main(int argc, char* argv[])
     runContainer();
 
     // //update container
-    // for(int cpu = 0; cpu<4; cpu++)
-    // {
+    for(int cpu = 0; cpu<4; cpu++)
+    {
 
         // int cpu = atoi(argv[2]);
-        int cpu = 2;
+        // int cpu = 2;
 
         // int period = 10000;
         copyBenchOption(cpu);  //NOTE: only for HPL bench 
@@ -162,7 +162,7 @@ int main(int argc, char* argv[])
             cout << ">>>\tfinish  cpu: " << cpu << " period: " << period << endl;
         }
 
-    // }
+    }
 
     //stop container
     stopContainer();
