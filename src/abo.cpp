@@ -51,8 +51,6 @@ int main(int argc, char* argv[])
     system(command);
     system(("mkdir "+ OUTPUT[HOST]).c_str());
 
-    //TODO: hpl은 프로세서 수 늘리면 HPL.dat도 고쳐야 함.
-    //TODO: 숫자 바꾸기. cpu 랑 period랑. 
     // RUN benchmarking
     // for(int cpu = 3; cpu<4; cpu++)
     // {
