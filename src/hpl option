@@ -1,2 +1,0 @@
- mpirun --allow-run-as-root -np 4 xhpl
-
