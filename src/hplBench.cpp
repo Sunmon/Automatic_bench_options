@@ -11,7 +11,7 @@ string IMG;
 string NAME;
 string OUTPUT[2];
 // string NUM_CPU[4] = {"0", "0,2", "0,2,4", "0,2,4,6"};
-string NUM_CPU[4] = {"0", "0,1", "0,1,2", "0,1,2,3"};
+string NUM_CPU[4] = {"0", "0-1", "0-2", "0-3"};
 
 string EXEC;
 // const char* command;
@@ -98,16 +98,19 @@ void runContainer()
     command(RUN);
 }
 
-void updateContainer(int cpu, int period)
+void updateContainer(int cpu, int period, int quota)
 {
     //set cpu option
     string s_period = to_string(period);
-    string s_quota = to_string((period/2));
+    string s_quota = to_string(quota);
     string update = 
         "docker update --cpuset-cpus=" + NUM_CPU[cpu] + " "
         "--cpu-period=" + s_period + " " +
         "--cpu-quota=" + s_quota + 
         " " + NAME;
+
+
+        cout << ">>>\t" << update << endl;
         
     command(update);
 }
@@ -142,24 +145,24 @@ int main(int argc, char* argv[])
     runContainer();
 
     // //update container
-    // //TODO: cpu set 
-    for(int cpu = 0; cpu<4; cpu++)
-    {
+    // for(int cpu = 0; cpu<4; cpu++)
+    // {
 
         // int cpu = atoi(argv[2]);
-        // int cpu = 0;
+        int cpu = 2;
+
         // int period = 10000;
         copyBenchOption(cpu);  //NOTE: only for HPL bench 
         makeDir(OUTPUT[HOST] + "/" + NUM_CPU[cpu]);
-        for(int period = 10000; period <= 100000; period += 10000)
+        for(int period = 100000; period <= 1000000; period += 100000)
         {
-            updateContainer(cpu, period);
+            updateContainer(cpu, period, period/2);
             execContainer();
             saveOutputToHost(cpu, period);
             cout << ">>>\tfinish  cpu: " << cpu << " period: " << period << endl;
         }
 
-    }
+    // }
 
     //stop container
     stopContainer();
