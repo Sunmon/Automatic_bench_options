@@ -35,11 +35,11 @@ void initSock(SOCK& sock)
 
 //sockaddr_in 구조체 초기화
 //NOTE: server에 있는애랑 다름
-void initSockAddr(struct sockaddr_in& addr, char* ip, char* port = "SERV_PORT")
+void initSockAddr(struct sockaddr_in& addr, char* ip, int port = SERV_PORT)
 {
     memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;                  //소켓 주소 체계 = 인터넷으로 설정
-    addr.sin_port = htons(atoi(port));           //포트 번호
+    addr.sin_port = htons(port);           //포트 번호
     addr.sin_addr.s_addr= inet_addr(ip);    //서버 주소 ip주소 저장 구조체
 
     // inet_pton(AF_INET, SERV_IP_ADDR, &addr.sin_addr);
@@ -88,7 +88,6 @@ int main(int argc, char* argv[])
     initSock(clt_sock);
     initSockAddr(serv_addr, SERV_IP_ADDR);
     connecting(clt_sock, serv_addr);
-
 
 
 }
