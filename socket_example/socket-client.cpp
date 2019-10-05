@@ -48,6 +48,12 @@ void initSockAddr(struct sockaddr_in& addr, char* ip, char* port = "SERV_PORT")
 void connecting(SOCK& sock, const struct sockaddr_in& serverAddr)
 {
     int isSuccess = connect(clt_sock, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
+    if(isSuccess <0)
+    {
+        printf("Connect failed\n");
+        exit(-1);
+
+    }
     if(isSuccess >= 0)
     {
         printf("Connected\n");
