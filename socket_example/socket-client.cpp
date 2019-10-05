@@ -88,9 +88,6 @@ int main(int argc, char* argv[])
     initSock(clt_sock);
     initSockAddr(serv_addr, SERV_IP_ADDR);
     connecting(clt_sock, serv_addr);
-
-
-
 }
 
 

@@ -62,7 +62,7 @@ void listening(int& serverSock, int connects)
     printf("Listening...\n");
 }
 
-void connecting(SOCK& serverSock, SOCK& clientSock, struct sockaddr_in& clientAddr )
+void accepting(SOCK& serverSock, SOCK& clientSock, struct sockaddr_in& clientAddr )
 {
     clientSock = accept(serverSock, (struct sockaddr*)&clientAddr, (socklen_t *)sizeof(clientAddr));
     if(clientSock < 0)
@@ -104,7 +104,7 @@ int main()
     binding(serv_sock, serv_addr);
     
     listening(serv_sock, 1);
-    connecting(serv_sock, clt_sock, clt_addr);
+    accepting(serv_sock, clt_sock, clt_addr);
 
     // sending(clt_sock, buffer, 0);
 
