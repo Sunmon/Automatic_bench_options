@@ -1,3 +1,4 @@
+#include <cstring>
 #include <stdio.h>
 #include <stdlib.h>
 // #include <sys/socket.h>
@@ -85,3 +86,31 @@ int main(int argc, char* argv[])
 
 
 }
+
+
+
+//     printf("Connection Success !\n");
+
+//     printf("asdfadsf\n");
+//     char msg[30] = {0};
+//     int isReceive = recv(sock, msg, 30, 0);
+//     // printf("%d", isReceive);
+//     if(isReceive>0) {
+//         printf("Received msg : ");
+//         msg[29] = '\0';
+//         printf("%s", msg);
+//         // std::cout << msg << std::endl;
+//     }
+//     // int str_len = read(sock, &msg, sizeof(msg));
+//     // for(auto& m: msg) printf("%c", m);
+//     // printf("\n");
+
+//     // puts("received msg");
+
+
+//     close(sock);
+
+//     //TODO: 만약 소켓 안 닫고 종료하면, 알아서 닫히나?
+
+//     return 0;
+// }
