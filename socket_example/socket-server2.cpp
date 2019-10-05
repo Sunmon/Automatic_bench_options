@@ -1,10 +1,11 @@
 // https://blog.neonkid.xyz/116
 
 #include <cstdio>
-// #include <iostream>
+#include <iostream>
 #include <arpa/inet.h>
 #include <netinet/in.h> //socket()
 #include <unistd.h>
+#include <cstring>
 #define SERV_IP_ADDR "192.168.0.11"
 #define SERV_PORT 5000
 #define BUF_LEN 128
@@ -63,14 +64,34 @@ int main(int argc, char *argv[])
         printf("Connected client: %s\n", temp);
 
 
-        int msg_size = read(client_fd, buffer, 1024);
-        write(client_fd, buffer, msg_size);
-        close(client_fd);
-        
+        // int msg_size = read(client_fd, buffer, 1024);
+        // write(client_fd, buffer, msg_size);
+
+
+        //send message to client
+        // std::string msg = "hello, world!";
+        // char* buf = msg.c_str();
+        // write(client_fd, , sizeof(msg.c_str()));
+        // write(client_fd, &msg, sizeof(msg));
+        // puts("written msg");
+
+        char msg[] = "hello world!";
+        int isSend = send(client_fd, msg, sizeof(msg), 0);
+        if(isSend > 0)
+        {
+            printf("send complete\n");
+            close(client_fd);
+
+        }
+
+
+
+
+
 
     }
+     close(server_fd);
 
-    close(server_fd);
 
     return 0;
 }
