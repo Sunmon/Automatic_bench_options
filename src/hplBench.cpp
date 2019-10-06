@@ -97,7 +97,7 @@ void updateContainer(int cpu, int period, int quota)
     string s_period = to_string(period);
     string s_quota = to_string(quota);
     string update = 
-        "docker update --cpuset-cpus=" + NUM_CPU[cpu] + " "
+        "docker update --cpuset-cpus=" + NUM_CPU[cpu] + " " +
         "--cpu-period=" + s_period + " " +
         "--cpu-quota=" + s_quota + 
         " " + NAME;
