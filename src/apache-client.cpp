@@ -118,7 +118,7 @@ int main(int argc, char* argv[])
         for(int period = 100000; period <= 1000000; period += 100000)
         {
             updateContainer(cpu, period, period/2);
-            runJmeter(OUTPUT[HOST]+"/"+to_string(period)); //NOTE: only for jmeter
+            runJmeter(OUTPUT[HOST]+"/"+NUM_CPU[cpu]+"/"+to_string(period)); //NOTE: only for jmeter
             cout << ">>>\tfinish  cpu: " << cpu << " period: " << period <<"\t<<<\n";
         }
     }
