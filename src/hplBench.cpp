@@ -15,7 +15,9 @@
 #include <cstring>
 #define CONTAINER 0
 #define HOST 1
-#define CORE 4      //TODO: 듀얼코어면 이 값을 2로 바꾸기
+//TODO: 듀얼코어면 이 값을 2로 바꾸기
+
+#define CORE 4
 
 using namespace std;
 
