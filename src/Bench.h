@@ -15,7 +15,7 @@ class Bench
     // private:
         int CORE = 4;
         const std::string CPUSET[4] = {"0", "0-1", "0-2", "0-3"}; //cpu 번호 설정 필요. "0", "0,2", "0,2,4", "0,2,4,6"일수도 있음
-        virtual void init();
+        virtual void initEnv();
         void command(const std::string& cmd);
         void makeDir(const std::string& dir);
 

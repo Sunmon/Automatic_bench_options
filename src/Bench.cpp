@@ -17,7 +17,7 @@ void Bench::makeDir(const std::string& dir)
     command(mkdir);
 }
 
-void Bench::init()
+void Bench::initEnv()
 {
     //기본 output 폴더 만들기
     outDir = "../out/"+NAME+"/";
@@ -66,7 +66,7 @@ void Bench::benchmark()
 {
     // createContainer();
     runContainer();
-    init();
+    initEnv();
 
     //update container & run benchmark
     for(int cpu = 0; cpu < CORE; cpu++)

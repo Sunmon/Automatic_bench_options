@@ -14,9 +14,9 @@ void HPL::exec()
     Bench::command(exec);
 }
 
-void HPL::init()
+void HPL::initEnv()
 {
-    Bench::init();
+    Bench::initEnv();
     cpEnv();
 }
 
