@@ -20,7 +20,7 @@ void Bench::makeDir(const std::string& dir)
 void Bench::init()
 {
 
-    this->defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
+    this->runOption = " -dit --rm --name " + NAME + " " + IMG;
     this->DOCKER = "docker ";
 
 
@@ -42,7 +42,7 @@ void Bench::init()
 
 void Bench::runContainer()
 {
-    string run = DOCKER + "run " + defaultOpt;
+    string run = DOCKER + "run " + runOption;
     command(run);
 }
 
@@ -79,19 +79,20 @@ void Bench::benchmark()
     cpEnvToContainer();
 
     //update container & run benchmark
-    for(int cpu = 0; cpu < CORE; cpu++)
-    {
-        for(int period = 100000; period <= 1000000; period += 100000)
-        {
-
-        // for(int cpu = 1; cpu < 2; cpu++)
+    // for(int cpu = 0; cpu < CORE; cpu++)
+    // {
+        // for(int period = 100000; period <= 1000000; period += 100000)
         // {
 
-            // for(int period = 1000000; period <= 1000000; period += 1000000)
-            // {
+        for(int cpu = 1; cpu < 2; cpu++)
+        {
+
+            for(int period = 1000000; period <= 1000000; period += 1000000)
+            {
 
             updateContainer(cpu, period, period/2);
             runBenchTool(cpu, period, period/2);
+            saveRslt(cpu, period, period/2);
             // cout << ">>>\tfinish  cpu: " << cpu << " period: " << period <<"\t<<<\n";
         }
     }
@@ -112,6 +113,10 @@ void Bench::setCore(int num)
     this->CORE = num;
 };
 
+void Bench::saveRslt(int cpu, int period, int quota)
+{
+    return;
+}
 
 Bench::Bench()
 {

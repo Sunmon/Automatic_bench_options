@@ -1,5 +1,6 @@
 #pragma once
 #include "Bench.h"
+#include <cstring>
 
 class Httpd_Server : public Bench
 {

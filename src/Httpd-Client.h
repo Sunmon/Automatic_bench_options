@@ -12,7 +12,7 @@ class Httpd_Client : public Bench
     void runBenchTool(int cpu, int period, int quota) override;
     void init() override;
 
+    std::string servAddr; 
 
-    
 
 };

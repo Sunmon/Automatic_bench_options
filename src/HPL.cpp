@@ -3,21 +3,22 @@ using namespace std;
 
 void HPL::runBenchTool(int cpu, int period, int quota)
 {
-    exec();
-    cpRslt(cpu, period, quota);
-}
-
-void HPL::exec()
-{
     string mpirun = " mpirun --allow-run-as-root -np 4 xhpl";
     string exec = "docker exec " + NAME + mpirun;
     Bench::command(exec);
+    // exec();
+    // saveRslt(cpu, period, quota);
 }
 
-void HPL::init()
-{
-    Bench::init();
-}
+// void HPL::exec()
+// {
+//    
+// }
+
+// void HPL::init()
+// {
+//     Bench::init();
+// }
 
 //실험환경설정 컨테이너로 복사
 void HPL::cpEnvToContainer()
@@ -27,7 +28,7 @@ void HPL::cpEnvToContainer()
 }
 
 //실험결과를 호스트 컴퓨터로 복사
-void HPL::cpRslt(int cpu, int period, int quota)
+void HPL::saveRslt(int cpu, int period, int quota)
 {
     string s_cpu = CPUSET[cpu];
     string s_period = to_string(period/1000);

@@ -23,6 +23,7 @@ class Bench
         // virtual void createContainer(const std::string& opt); 
         virtual void runContainer();
         virtual void updateContainer(int cpu, int period, int quota);
+        virtual void saveRslt(int cpu, int period, int quota);
 
         // virtual void runProgram();
 
@@ -33,7 +34,7 @@ class Bench
         // std::string RUN              ;//= " docker run ";
         std::string DOCKER;             //"docker -H PORT" or "docker"
         // std::string UPDATE           ;//= " docker update ";
-        std::string defaultOpt      ;//" -dit --rm --name " + NAME + " " + IMG;
+        std::string runOption      ;//" -dit --rm --name " + NAME + " " + IMG;
         std::string manVar[3]   ; //update와 결과 저장에 쓰는 조작변인.
         std::string outDir;
         // const int CPU = 0, PER = 1, QUO = 2;
@@ -43,7 +44,6 @@ class Bench
         virtual void stopContainer();
         virtual void cpEnvToContainer();
 
-        
 
     //  public: 
         virtual void benchmark();    //이 함수 실행하면 된다
