@@ -19,6 +19,11 @@ void Bench::makeDir(const std::string& dir)
 
 void Bench::init()
 {
+
+    this->defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
+    this->DOCKER = "docker ";
+
+
     //기본 output 폴더 만들기
     outDir = "../out/"+NAME+"/";
     makeDir(outDir);
@@ -37,7 +42,8 @@ void Bench::init()
 
 void Bench::runContainer()
 {
-    command(RUN);
+    string run = DOCKER + "run " + defaultOpt;
+    command(run);
 }
 
 
@@ -114,11 +120,9 @@ Bench::Bench()
 
 Bench::Bench(const string& img, const string& name)
 {
-
     this->IMG = img;
     this->NAME =  name;
-    this->defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
-    this->DOCKER = "docker ";
+    
 
     // init();
 

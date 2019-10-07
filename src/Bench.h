@@ -30,7 +30,7 @@ class Bench
         std::string IMG              ;//= "";
         std::string NAME             ;//= "";
         // std::string CREATE           ;//= " docker create ";
-        std::string RUN              ;//= " docker run ";
+        // std::string RUN              ;//= " docker run ";
         std::string DOCKER;             //"docker -H PORT" or "docker"
         // std::string UPDATE           ;//= " docker update ";
         std::string defaultOpt      ;//" -dit --rm --name " + NAME + " " + IMG;

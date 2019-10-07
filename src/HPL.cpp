@@ -44,7 +44,7 @@ void HPL::cpRslt(int cpu, int period, int quota)
 HPL::HPL() : Bench("blackmilk274/hpl", "hpl")
 {
     // init();
-    Bench::RUN = "docker run" + Bench::defaultOpt;
+    // Bench::RUN = "docker run" + Bench::defaultOpt;
 
 
     // Bench::IMG = "blackmilk274/hpl";
