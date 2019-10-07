@@ -14,9 +14,19 @@ void Bench::command(const std::string& cmd)
 void Bench::makeDir(const std::string& dir)
 {
     string mkdir = "mkdir " + dir;
-    // command(mkdir);
+    command(mkdir);
 }
 
+void Bench::init()
+{
+    //기본 output 폴더 만들기
+    outDir = "../out/"+NAME+"/";
+    makeDir(outDir);
+
+    // this->IMG = img;
+    // this->NAME =  name;
+    // this->defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
+}
 
 
 // void Bench::createContainer(const std::string& opt)
@@ -30,21 +40,67 @@ void Bench::runContainer()
     command(RUN);
 }
 
-// void Bench::updateContainer()
-// {
-//     command(UPDATE);
-// }
-void Bench::runProgram(){}
+
+// set docker cpu option
+void Bench::updateContainer(int cpu, int period, int quota)
+{
+    manVar[CPUS] = CPUSET[cpu];
+    manVar[PER] = to_string(period);
+    manVar[QUO] = to_string(quota);
+    // string s_cpu = CPUSET[cpu];
+    // string s_period = to_string(period);
+    // string s_quota = to_string(quota);
+    string update = 
+        "docker update --cpuset-cpus=" + manVar[CPUS] + " " +
+        "--cpu-period=" + manVar[PER] + " " +
+        "--cpu-quota=" + manVar[QUO] + " " + NAME;
+    command(update);
+}
+
+
+
 
 
 //이 함수 실행하면 된다
 void Bench::benchmark()
 {
+    // createContainer();
     runContainer();
+    init();
 
+    //update container & run benchmark
+    for(int cpu = 0; cpu < CORE; cpu++)
+    {
+        for(int period = 100000; period <= 1000000; period += 100000)
+        {
+
+        // for(int cpu = 1; cpu < 2; cpu++)
+        // {
+
+            // for(int period = 1000000; period <= 1000000; period += 1000000)
+            // {
+
+            updateContainer(cpu, period, period/2);
+            runBenchTool(cpu, period, period/2);
+            // cout << ">>>\tfinish  cpu: " << cpu << " period: " << period <<"\t<<<\n";
+        }
+    }
+
+    stopContainer();
 }    
 
-void setNUM_CPU(int num){};
+// stop container
+void Bench::stopContainer()
+{
+    string stop = "docker stop " + this->NAME;
+    command(stop);
+}
+
+
+void Bench::setCore(int num)
+{
+    this->CORE = num;
+};
 
 
 Bench::Bench()
@@ -54,8 +110,12 @@ Bench::Bench()
 
 Bench::Bench(const string& img, const string& name)
 {
+
     this->IMG = img;
     this->NAME =  name;
     this->defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
+
+    // init();
+
 }
 Bench::~Bench(){}
