@@ -79,16 +79,16 @@ void Bench::benchmark()
     cpEnvToContainer();
 
     //update container & run benchmark
-    // for(int cpu = 0; cpu < CORE; cpu++)
-    // {
-        // for(int period = 100000; period <= 1000000; period += 100000)
-        // {
-
-        for(int cpu = 1; cpu < 2; cpu++)
+    for(int cpu = 0; cpu < CORE; cpu++)
+    {
+        for(int period = 100000; period <= 1000000; period += 100000)
         {
 
-            for(int period = 1000000; period <= 1000000; period += 1000000)
-            {
+        // for(int cpu = 1; cpu < 2; cpu++)
+        // {
+
+            // for(int period = 1000000; period <= 1000000; period += 1000000)
+            // {
 
             updateContainer(cpu, period, period/2);
             runBenchTool(cpu, period, period/2);

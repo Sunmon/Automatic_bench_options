@@ -6,10 +6,10 @@ using namespace std;
 
 int main()
 {
-    // Bench* ptr = new HPL();
+    Bench* ptr = new HPL();
     // Bench* ptr = new Httpd_Server();
     // Bench* ptr = new Httpd_Server();
-    Bench* ptr = new Httpd_Client();
+    // Bench* ptr = new Httpd_Client();
     // ptr->init();
     ptr->benchmark();
 
