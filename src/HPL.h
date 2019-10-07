@@ -12,7 +12,8 @@ class HPL : public Bench
         void cpRslt(int cpu, int period, int quota);
 
 
-        void initEnv() override;
+        void init() override;
+        void cpEnvToContainer() override;
     public:
         // void benchmark() override;    //이 함수 실행하면 된다
         HPL();

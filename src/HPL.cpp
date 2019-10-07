@@ -14,14 +14,13 @@ void HPL::exec()
     Bench::command(exec);
 }
 
-void HPL::initEnv()
+void HPL::init()
 {
-    Bench::initEnv();
-    cpEnv();
+    Bench::init();
 }
 
 //실험환경설정 컨테이너로 복사
-void HPL::cpEnv()
+void HPL::cpEnvToContainer()
 {
     string cp = "docker cp ../data/HPL.dat " + NAME + ":/AddedFiles/hpl-2.3/bin/x86_64";
     Bench::command(cp);

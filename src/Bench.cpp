@@ -17,7 +17,7 @@ void Bench::makeDir(const std::string& dir)
     command(mkdir);
 }
 
-void Bench::initEnv()
+void Bench::init()
 {
     //기본 output 폴더 만들기
     outDir = "../out/"+NAME+"/";
@@ -50,23 +50,27 @@ void Bench::updateContainer(int cpu, int period, int quota)
     // string s_cpu = CPUSET[cpu];
     // string s_period = to_string(period);
     // string s_quota = to_string(quota);
-    string update = 
-        "docker update --cpuset-cpus=" + manVar[CPUS] + " " +
+    string update = DOCKER +
+        "update --cpuset-cpus=" + manVar[CPUS] + " " +
         "--cpu-period=" + manVar[PER] + " " +
         "--cpu-quota=" + manVar[QUO] + " " + NAME;
     command(update);
 }
 
 
-
+void Bench::cpEnvToContainer()
+{
+    return;
+}
 
 
 //이 함수 실행하면 된다
 void Bench::benchmark()
 {
     // createContainer();
+    init();
     runContainer();
-    initEnv();
+    cpEnvToContainer();
 
     //update container & run benchmark
     for(int cpu = 0; cpu < CORE; cpu++)
@@ -92,7 +96,7 @@ void Bench::benchmark()
 // stop container
 void Bench::stopContainer()
 {
-    string stop = "docker stop " + this->NAME;
+    string stop = DOCKER+ "stop " + this->NAME;
     command(stop);
 }
 
@@ -114,6 +118,7 @@ Bench::Bench(const string& img, const string& name)
     this->IMG = img;
     this->NAME =  name;
     this->defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
+    this->DOCKER = "docker ";
 
     // init();
 

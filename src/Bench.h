@@ -11,11 +11,12 @@
 
 class Bench
 {
+    //TODO: public/ private/ protectec 구분하기
     public:
     // private:
         int CORE = 4;
         const std::string CPUSET[4] = {"0", "0-1", "0-2", "0-3"}; //cpu 번호 설정 필요. "0", "0,2", "0,2,4", "0,2,4,6"일수도 있음
-        virtual void initEnv();
+        virtual void init();
         void command(const std::string& cmd);
         void makeDir(const std::string& dir);
 
@@ -30,6 +31,7 @@ class Bench
         std::string NAME             ;//= "";
         // std::string CREATE           ;//= " docker create ";
         std::string RUN              ;//= " docker run ";
+        std::string DOCKER;             //"docker -H PORT" or "docker"
         // std::string UPDATE           ;//= " docker update ";
         std::string defaultOpt      ;//" -dit --rm --name " + NAME + " " + IMG;
         std::string manVar[3]   ; //update와 결과 저장에 쓰는 조작변인.
@@ -39,6 +41,7 @@ class Bench
         // virtual void runProgram() = 0;
         virtual void runBenchTool(int cpu, int period, int quota) = 0;
         virtual void stopContainer();
+        virtual void cpEnvToContainer();
 
         
 
