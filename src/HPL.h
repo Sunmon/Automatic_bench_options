@@ -7,8 +7,8 @@ class HPL : public Bench
 {
     public:
         void runBenchmark() override;    //이 함수 실행하면 된다
-        HPL();
-        ~HPL();
+        HPL(){};
+        ~HPL(){};
 
     protected:
         void createContainer() override; 

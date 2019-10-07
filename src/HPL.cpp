@@ -24,13 +24,13 @@ void HPL::runProgram()
 
 }
 
-HPL::HPL()
-{
-    // const string& IMG = "blackmilk274/hpl";
-    // const string& NAME = "hpl";
-}
+// HPL::HPL()
+// {
+//     // const string& IMG = "blackmilk274/hpl";
+//     // const string& NAME = "hpl";
+// }
 
-HPL::~HPL()
-{
+// HPL::~HPL()
+// {
 
-}
+// }

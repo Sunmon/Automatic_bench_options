@@ -24,7 +24,7 @@ class Bench
         // const std::string NAME; 
         // const std::string NUM_CPU[4] = {"0", "0-1", "0-2", "0-3"}; //cpu 번호 설정 필요. "0", "0,2", "0,2,4", "0,2,4,6"일수도 있음
 
-        Bench(){};   
-        virtual ~Bench();
+        Bench(){}; 
+        virtual ~Bench(){};
         // string OUTPUT[2]; 
 };
