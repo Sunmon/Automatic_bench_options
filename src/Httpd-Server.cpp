@@ -9,6 +9,11 @@ void Httpd_Server::benchmark()
     command(runDaemon);
 }
 
+void Httpd_Server::runBenchTool(int cpu, int period, int quota){
+    //Bench::runBenchTool이 순수 가상함수라서 자리 채울뿐
+}
+
+
 
 Httpd_Server::Httpd_Server() :Bench("httpd-server", "httpd-server")
 {
