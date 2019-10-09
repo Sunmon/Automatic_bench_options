@@ -1,5 +1,6 @@
 #pragma once
 #include "Bench.h"
+#include <cstring>
 
 class Httpd_Client : public Bench
 {
@@ -7,7 +8,7 @@ class Httpd_Client : public Bench
     private:
         void runBenchTool(int cpu, int period, int quota) override;
         void init() override;
-        std::string servAddr; 
+        std::string servAddr;
 
     public:
         Httpd_Client();

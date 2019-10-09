@@ -3,8 +3,8 @@
 #include <cstring>
 #include <iostream>
 #include <stdlib.h>
-#include "json/json.h"
 #include <fstream>
+#include "json/json.h"
 
 #define CPUS 0
 #define PER 1

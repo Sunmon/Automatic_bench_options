@@ -3,6 +3,7 @@
 using namespace std;
 
 
+/** public **/
 //벤치마크 실행하기
 void Bench::benchmark()
 {
@@ -35,6 +36,26 @@ void Bench::benchmark()
 
 
 
+
+//최대 코어 수 설정
+void Bench::setCore(int num)
+{
+    this->CORE = num;
+};
+
+
+Bench::Bench(){
+}
+
+Bench::Bench(const string& img, const string& name)
+{
+    this->IMG = img;
+    this->NAME =  name;
+}
+
+Bench::~Bench(){
+}
+
 //terminal에 명령어 전달
 void Bench::command(const std::string& cmd)
 {
@@ -49,13 +70,16 @@ void Bench::makeDir(const std::string& dir)
     command(mkdir);
 }
 
+
+
+
+/** protected **/
+
 //초기화
 void Bench::init()
 {
-
     this->runOption = " -dit --rm --name " + NAME + " " + IMG;
     this->DOCKER = "docker ";
-
 
     //기본 output 폴더 만들기
     outDir = "../out/"+NAME+"/";
@@ -64,6 +88,22 @@ void Bench::init()
     //json 환경파일 가져오기
     initJson();
 }
+
+
+//호스트나 인터넷에 있는 환경설정을 컨테이너 내로 복사
+void Bench::cpEnvToContainer()
+{
+    return;
+}
+
+// 컨테이너내에 저장된 결과파일을 호스트 컴퓨터로 복사
+void Bench::saveRslt(int cpu, int period, int quota)
+{
+    return;
+}
+
+
+/** private **/
 
 //config.json 파일 읽어서 config 변수에 저장
 void Bench::initJson()
@@ -95,40 +135,9 @@ void Bench::updateContainer(int cpu, int period, int quota)
     command(update);
 }
 
-
-
-void Bench::cpEnvToContainer()
-{
-    return;
-}
-
-
-
 // stop container
 void Bench::stopContainer()
 {
     string stop = DOCKER+ "stop " + this->NAME;
     command(stop);
-}
-
-
-void Bench::setCore(int num)
-{
-    this->CORE = num;
-};
-
-void Bench::saveRslt(int cpu, int period, int quota)
-{
-    return;
-}
-
-Bench::Bench(){
-}
-
-Bench::Bench(const string& img, const string& name)
-{
-    this->IMG = img;
-    this->NAME =  name;
-}
-Bench::~Bench(){
 }

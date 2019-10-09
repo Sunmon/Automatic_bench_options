@@ -9,10 +9,11 @@
 
     "jmeter" : 
     {
-        "path" : "~/Desktop/apache-jmeter-5.1.1/bin/jmeter",
-        "server.IP" : "konkuk.ac.kr",
-        "server.port" : "80",
-        "user" : 64,
+        "jmeterPath" : "~/Desktop/apache-jmeter-5.1.1/bin/jmeter",
+        "jmxPath" : "../env/jmeter-set.jmx",
+        "server.IP" : "192.168.0.1",
+        "server.port" : "8080",
+        "users" : 64,
         "rampup" : 1,
         "threads" : 5000
     }
