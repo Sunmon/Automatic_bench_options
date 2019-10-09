@@ -27,8 +27,18 @@ void Bench::init()
     //기본 output 폴더 만들기
     outDir = "../out/"+NAME+"/";
     makeDir(outDir);
+
+    //json 환경파일 가져오기
+    initJson();
 }
 
+void Bench::initJson()
+{
+    //각종 설정을 모아둔 json파일 읽어오기
+    ifstream jsonDir("../env/config.json");
+    Json::Reader reader;
+    reader.parse(jsonDir, config); // reader can also read strings
+}
 
 void Bench::runContainer()
 {
@@ -115,4 +125,5 @@ Bench::Bench(const string& img, const string& name)
     this->IMG = img;
     this->NAME =  name;
 }
-Bench::~Bench(){}
+Bench::~Bench(){
+}

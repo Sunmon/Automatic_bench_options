@@ -4,6 +4,13 @@
 #include <cstring>
 #include <iostream>
 #include <stdlib.h>
+#include "json/json.h"
+#include <fstream>
+
+// #include "memory.h"
+// #include "parsor.h"
+
+
 #define CPUS 0
 #define PER 1
 #define QUO 2
@@ -17,6 +24,7 @@ class Bench
         virtual void runContainer();
         virtual void updateContainer(int cpu, int period, int quota);
         virtual void stopContainer();
+        void initJson();
 
     protected:
         std::string IMG;
@@ -37,11 +45,14 @@ class Bench
 
 
 
-     public: 
+     public:
         virtual void benchmark();    //이 함수 실행하면 된다
         void setCore(int num);
+        Json::Value config;
+
         Bench(); 
         Bench(const std::string& img, const std::string& name);
         virtual ~Bench();
-        // void printName(){std::cout << NAME << std::endl;}
+        
+        
 };

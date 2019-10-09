@@ -1,5 +1,5 @@
 //https://dojang.io/mod/page/view.php?id=724
-
+#pragma once
 #define _CRT_SECURE_NO_WARNINGS    // fopen 보안 경고로 인한 컴파일 에러 방지
 #include <stdio.h>     // 파일 처리 함수가 선언된 헤더 파일
 #include <stdlib.h>    // malloc, free, atof 함수가 선언된 헤더 파일
@@ -22,7 +22,7 @@ typedef struct _TOKEN {
     bool isArray;      // 현재 토큰이 배열인지 표시
 } TOKEN;
 
-#define TOKEN_COUNT 20    // 토큰의 최대 개수
+#define TOKEN_COUNT 40    // 토큰의 최대 개수
 
 // JSON 구조체
 typedef struct _JSON {
@@ -94,7 +94,7 @@ void parseJSON(char *doc, int size, JSON *json)    // JSON 파싱 함수
             // 토큰 종류는 문자열
             json->tokens[tokenIndex].type = TOKEN_STRING;
             // 문자열 길이 + NULL 공간만큼 메모리 할당
-            json->tokens[tokenIndex].string = (char*)malloc(stringLength + 1);
+            json->tokens[tokenIndex].string = (char *)malloc(stringLength + 1);
             // 할당한 메모리를 0으로 초기화
             memset(json->tokens[tokenIndex].string, 0, stringLength + 1);
 
@@ -130,7 +130,7 @@ void parseJSON(char *doc, int size, JSON *json)    // JSON 파싱 함수
                     // 토큰 종류는 문자열
                     json->tokens[tokenIndex].type = TOKEN_STRING;
                     // 문자열 길이 + NULL 공간만큼 메모리 할당
-                    json->tokens[tokenIndex].string = malloc(stringLength + 1);
+                    json->tokens[tokenIndex].string = (char*)malloc(stringLength + 1);
                     // 현재 문자열은 배열의 요소
                     json->tokens[tokenIndex].isArray = true;
                     // 할당한 메모리를 0으로 초기화

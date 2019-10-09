@@ -1,8 +1,10 @@
 {
     "HPL" :
     {
+        "root" : ":/AddedFiles/hpl-2.3/bin/x86_64",
         "mpirun" : "mpirun --allow-run-as-root -np 4 xhpl",
-        "outputPath" : ":/AddedFiles/hpl-2.3/bin/x86_64"
+        "outputPath" : ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.out",
+        "HPL.dat" : "../env/HPL.dat"
 
 
     },
@@ -15,5 +17,6 @@
         "user" : 64,
         "rampup" : 1,
         "threads" : 5000
-    }
+    },
+    "test1" : "test0001"
 }

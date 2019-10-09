@@ -30,4 +30,5 @@ int main(int argc, char *argv[])
     string program = string(argv[1]);
     Bench* bench = selectBench(program);
     bench->benchmark();
+    // bench->print();
 }
