@@ -82,6 +82,20 @@ Sunmon
 
 
 
+---
 
+# jmeter
+
+
+
+jmeter cli로 파라미터 넘겨줘서 테스트하자ㅣ
+
+변수는 ${__P(threads,5000)}이런식으로 생겼고, 사용법은 -Jthreads=1이렇게.
+
+5000은 기본값.
+
+-J[property] = [value]
+
+유저수 : -Jusers, rampup: -Jrampup쓰레드 개수 ; -Jthreads= , 접속 IP =  -Jserver.IP, 포트: -Jserver.port
 
 ---

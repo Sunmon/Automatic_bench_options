@@ -14,7 +14,7 @@ void Httpd_Server::runBenchTool(int cpu, int period, int quota)
     return;
 }
 
-Httpd_Server::Httpd_Server()
+Httpd_Server::Httpd_Server() :Bench("httpd-server", "httpd-server")
 {
 
 }

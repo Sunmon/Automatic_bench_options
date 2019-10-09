@@ -1,0 +1,95 @@
+================================================================================
+HPLinpack 2.3  --  High-Performance Linpack benchmark  --   December 2, 2018
+Written by A. Petitet and R. Clint Whaley,  Innovative Computing Laboratory, UTK
+Modified by Piotr Luszczek, Innovative Computing Laboratory, UTK
+Modified by Julien Langou, University of Colorado Denver
+================================================================================
+
+An explanation of the input/output parameters follows:
+T/V    : Wall time / encoded variant.
+N      : The order of the coefficient matrix A.
+NB     : The partitioning blocking factor.
+P      : The number of process rows.
+Q      : The number of process columns.
+Time   : Time in seconds to solve the linear system.
+Gflops : Rate of execution for solving the linear system.
+
+The following parameter values will be used:
+
+N      :   16384 
+NB     :     128 
+PMAP   : Row-major process mapping
+P      :       1 
+Q      :       2 
+PFACT  :   Crout 
+NBMIN  :       4 
+NDIV   :       2 
+RFACT  :   Crout 
+BCAST  :  1ringM 
+DEPTH  :       0 
+SWAP   : Mix (threshold = 64)
+L1     : transposed form
+U      : transposed form
+EQUIL  : yes
+ALIGN  : 8 double precision words
+
+--------------------------------------------------------------------------------
+
+- The matrix A is randomly generated for each test.
+- The following scaled residual check will be computed:
+      ||Ax-b||_oo / ( eps * ( || x ||_oo * || A ||_oo + || b ||_oo ) * N )
+- The relative machine precision (eps) is taken to be               1.110223e-16
+- Computational tests pass if scaled residuals are less than                16.0
+
+================================================================================
+T/V                N    NB     P     Q               Time                 Gflops
+--------------------------------------------------------------------------------
+WR01C2C4       16384   128     1     2             844.51             3.4724e+00
+HPL_pdgesv() start time Thu Oct  3 23:10:07 2019
+
+HPL_pdgesv() end time   Thu Oct  3 23:24:12 2019
+
+--------------------------------------------------------------------------------
+||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   2.57483654e-03 ...... PASSED
+================================================================================
+
+Finished      1 tests with the following results:
+              1 tests completed and passed residual checks,
+              0 tests completed and failed residual checks,
+              0 tests skipped because of illegal input values.
+--------------------------------------------------------------------------------
+
+
+
+
+End of Tests.
+================================================================================
+
+
+
+
+cpuset 0 period = 100000 quota = 50000 result = 175.32
+cpuset 0,1 period = 100000 quota = 50000 result = 644.88
+
+update말고 run 때 옵션을 준 경우용
+cpu0, cpu1 25퍼 전후로 사용
+cpuset 0,1 period = 100000 quota = 50000 result = 654.70
+
+
+만약 cpuset = 0,1 / period = 100000 / quota = 50000 / P=Q=1로 바꾸면?
+cpuset 0,1 period = 100000 quota = 50000 result = 705.49
+
+걍 cpus=2로 하고 돌리면?
+cpus = 2, => inspect : cpusetcpus = "" period = 0 quota = 0 result = 195.02
+
+cpus=2 cpuset-cpus= 0,1하면?
+cpus = 2, => inspect : cpusetcpus = "0,1" period = 0 quota = 0 , nanoCpus= 2000000000,
+result = 51.58
+
+cpuset-cpus = 0-1 / period = 100000 / quota = 50000 하면?
+cpusetcpus = "0-1" period = 100000 quota = 50000, nanoCpus = 0, result = 647.50
+
+cpuset-cpus = 0-1 / period = 100000 / quota = 50000 / np -2 하면?
+cpusetcpus = "0-1" period = 100000 quota = 50000, nanoCpus = 0, result = 406.10
+
+

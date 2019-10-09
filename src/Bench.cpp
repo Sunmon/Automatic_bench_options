@@ -27,18 +27,8 @@ void Bench::init()
     //기본 output 폴더 만들기
     outDir = "../out/"+NAME+"/";
     makeDir(outDir);
-
-    // this->IMG = img;
-    // this->NAME =  name;
-    // this->defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
 }
 
-
-// void Bench::createContainer(const std::string& opt)
-// {
-//     CREATE = opt + CREATE; 
-//     command(CREATE);
-// }
 
 void Bench::runContainer()
 {
@@ -53,9 +43,7 @@ void Bench::updateContainer(int cpu, int period, int quota)
     manVar[CPUS] = CPUSET[cpu];
     manVar[PER] = to_string(period);
     manVar[QUO] = to_string(quota);
-    // string s_cpu = CPUSET[cpu];
-    // string s_period = to_string(period);
-    // string s_quota = to_string(quota);
+
     string update = DOCKER +
         "update --cpuset-cpus=" + manVar[CPUS] + " " +
         "--cpu-period=" + manVar[PER] + " " +
@@ -78,11 +66,12 @@ void Bench::benchmark()
     runContainer();
     cpEnvToContainer();
 
+    //FIXME: 테스트 후 cpu개수, period 정하기
     //update container & run benchmark
-    for(int cpu = 0; cpu < CORE; cpu++)
-    {
-        for(int period = 100000; period <= 1000000; period += 100000)
-        {
+    // for(int cpu = 0; cpu < CORE; cpu++)
+    // {
+        // for(int period = 100000; period <= 1000000; period += 100000)
+        // {
 
         // for(int cpu = 1; cpu < 2; cpu++)
         // {
@@ -90,12 +79,12 @@ void Bench::benchmark()
             // for(int period = 1000000; period <= 1000000; period += 1000000)
             // {
 
+                int cpu = 1; int period = 100000;
             updateContainer(cpu, period, period/2);
             runBenchTool(cpu, period, period/2);
             saveRslt(cpu, period, period/2);
-            // cout << ">>>\tfinish  cpu: " << cpu << " period: " << period <<"\t<<<\n";
-        }
-    }
+        // }
+    // }
 
     stopContainer();
 }    
@@ -118,18 +107,12 @@ void Bench::saveRslt(int cpu, int period, int quota)
     return;
 }
 
-Bench::Bench()
-{
-    // defaultOpt = " -dit --rm --name " + NAME + " " + IMG;
+Bench::Bench(){
 }
 
 Bench::Bench(const string& img, const string& name)
 {
     this->IMG = img;
     this->NAME =  name;
-    
-
-    // init();
-
 }
 Bench::~Bench(){}

@@ -1,0 +1,18 @@
+//server
+
+dockerd -H tcp://192.168.0.1
+
+뭐가다른지 모르겠네
+
+docker -H tcp://0.0.0.0:2375
+
+//update하기
+curl -X POST /containers/apache/update \
+-H "Content-Type: application/json" \
+-d "{
+    CpuPeriod": 100000,
+    "CpuQuota": 50000,
+    "CpusetCpus": "0,1"
+    }"
+
+걍 다필요없다 상대컴퓨터도 도커가 깔려있으면 편한것이었다
