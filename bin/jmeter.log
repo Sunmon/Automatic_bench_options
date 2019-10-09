@@ -1,0 +1,26 @@
+2019-10-10 00:44:57,317 INFO o.a.j.u.JMeterUtils: Setting Locale to en_EN
+2019-10-10 00:44:57,339 INFO o.a.j.JMeter: Loading user properties from: /home/sunmon/Desktop/apache-jmeter-5.1.1/bin/user.properties
+2019-10-10 00:44:57,340 INFO o.a.j.JMeter: Loading system properties from: /home/sunmon/Desktop/apache-jmeter-5.1.1/bin/system.properties
+2019-10-10 00:44:57,340 INFO o.a.j.JMeter: Setting JMeter property: server.IP=192.168.0.11
+2019-10-10 00:44:57,340 INFO o.a.j.JMeter: Setting JMeter property: user=64
+2019-10-10 00:44:57,340 INFO o.a.j.JMeter: Setting JMeter property: rampup=1
+2019-10-10 00:44:57,340 INFO o.a.j.JMeter: Setting JMeter property: threads=5000
+2019-10-10 00:44:57,345 INFO o.a.j.JMeter: Copyright (c) 1998-2019 The Apache Software Foundation
+2019-10-10 00:44:57,345 INFO o.a.j.JMeter: Version 5.1.1 r1855137
+2019-10-10 00:44:57,345 INFO o.a.j.JMeter: java.version=11.0.4
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: java.vm.name=OpenJDK 64-Bit Server VM
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: os.name=Linux
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: os.arch=amd64
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: os.version=5.0.0-31-generic
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: file.encoding=UTF-8
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: java.awt.headless=true
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: Max memory     =1073741824
+2019-10-10 00:44:57,346 INFO o.a.j.JMeter: Available Processors =8
+2019-10-10 00:44:57,354 INFO o.a.j.JMeter: Default Locale=English (EN)
+2019-10-10 00:44:57,354 INFO o.a.j.JMeter: JMeter  Locale=English (EN)
+2019-10-10 00:44:57,354 INFO o.a.j.JMeter: JMeterHome=/home/sunmon/Desktop/apache-jmeter-5.1.1
+2019-10-10 00:44:57,354 INFO o.a.j.JMeter: user.dir  =/home/sunmon/Desktop/Automatic_bench_options/bin
+2019-10-10 00:44:57,354 INFO o.a.j.JMeter: PWD       =/home/sunmon/Desktop/Automatic_bench_options/bin
+2019-10-10 00:44:57,355 INFO o.a.j.JMeter: IP: 127.0.1.1 Name: sunmon-laptop FullName: sunmon-laptop
+2019-10-10 00:44:57,358 INFO o.a.j.s.FileServer: Default base='/home/sunmon/Desktop/Automatic_bench_options/bin'
+2019-10-10 00:44:57,360 INFO o.a.j.s.FileServer: Set new base='/home/sunmon/Desktop/Automatic_bench_options/bin/../env'
