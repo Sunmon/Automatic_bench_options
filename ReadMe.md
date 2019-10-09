@@ -41,12 +41,12 @@ $./abo [벤치마크 이름]
 빌드 방법 (g++ 기준) :
 
 ```
-$ g++ abo.cpp Bench.cpp [기타 벤치마크 전부.cpp] ./json/json.cpp
+$ g++ abo.cpp Bench.cpp [기타 벤치마크 전부.cpp] json.cpp
 ```
 
 예시:
 ```
-$ g++ abo.cpp Bench.cpp HPL.cpp Httpd-Client.cpp Httpd-Server.cpp ./json/json.cpp
+$ g++ abo.cpp Bench.cpp HPL.cpp Httpd-Client.cpp Httpd-Server.cpp json.cpp
 ```
 
 
