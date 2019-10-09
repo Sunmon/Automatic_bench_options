@@ -68,7 +68,7 @@ $ g++ abo.cpp Bench.cpp HPL.cpp Httpd-Client.cpp Httpd-Server.cpp json.cpp
 
 
 
-파일 경로나 이름같은거 바꾸고싶으면 `config.json`만 건드리면 됩니다. (소스 건드리거나 재빌드할필요 ㄴㄴ)
+파일 경로나 이름같은거 바꾸고싶으면 `config.json`만 건드리면 됩니다. (소스 건드리거나 재빌드, 컴파일할필요 ㄴㄴ)
 
 예) jmeter 실험 도메인을 건국대로 바꾸고 싶다? `config.json`의 *"server.IP"="konkuk.ac.kr"*로 수정
 
