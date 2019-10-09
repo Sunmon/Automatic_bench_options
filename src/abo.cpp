@@ -8,7 +8,7 @@
  * EXAMPLE: ./abo hpl , ./abo httpd-server, ./abo httpd-client
  **/
 
-#include "parson.h"
+#include "parsor.h"
 #include "BenchFacotry.h"
 #include "Bench.h"
 #include "HPL.h"
