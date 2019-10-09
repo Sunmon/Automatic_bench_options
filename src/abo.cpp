@@ -8,12 +8,7 @@
  * EXAMPLE: ./abo hpl , ./abo httpd-server, ./abo httpd-client
  **/
 
-#include "parsor.h"
 #include "BenchFacotry.h"
-#include "Bench.h"
-#include "HPL.h"
-#include "Httpd-Server.h"
-#include "Httpd-Client.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -30,5 +25,4 @@ int main(int argc, char *argv[])
     string program = string(argv[1]);
     Bench* bench = selectBench(program);
     bench->benchmark();
-    // bench->print();
 }

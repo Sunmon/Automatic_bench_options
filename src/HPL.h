@@ -1,7 +1,6 @@
 //HPL benchmark
 #pragma once 
 #include "Bench.h"
-#include <cstring>
 
 class HPL : public Bench
 {
@@ -14,6 +13,5 @@ class HPL : public Bench
     public:
         HPL();
         ~HPL();
-
     
 };

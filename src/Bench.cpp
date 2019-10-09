@@ -3,6 +3,38 @@
 using namespace std;
 
 
+//벤치마크 실행하기
+void Bench::benchmark()
+{
+    init();
+    runContainer();
+    cpEnvToContainer();
+
+    //FIXME: 테스트 후 cpu개수, period 정하기
+    //update container & run benchmark
+    // for(int cpu = 0; cpu < CORE; cpu++)
+    // {
+        // for(int period = 100000; period <= 1000000; period += 100000)
+        // {
+
+        // for(int cpu = 1; cpu < 2; cpu++)
+        // {
+
+            // for(int period = 1000000; period <= 1000000; period += 1000000)
+            // {
+
+                int cpu = 1; int period = 100000;
+            updateContainer(cpu, period, period/2);
+            runBenchTool(cpu, period, period/2);
+            saveRslt(cpu, period, period/2);
+        // }
+    // }
+
+    stopContainer();
+}    
+
+
+
 //terminal에 명령어 전달
 void Bench::command(const std::string& cmd)
 {
@@ -17,6 +49,7 @@ void Bench::makeDir(const std::string& dir)
     command(mkdir);
 }
 
+//초기화
 void Bench::init()
 {
 
@@ -32,6 +65,7 @@ void Bench::init()
     initJson();
 }
 
+//config.json 파일 읽어서 config 변수에 저장
 void Bench::initJson()
 {
     //각종 설정을 모아둔 json파일 읽어오기
@@ -62,42 +96,13 @@ void Bench::updateContainer(int cpu, int period, int quota)
 }
 
 
+
 void Bench::cpEnvToContainer()
 {
     return;
 }
 
 
-//이 함수 실행하면 된다
-void Bench::benchmark()
-{
-    // createContainer();
-    init();
-    runContainer();
-    cpEnvToContainer();
-
-    //FIXME: 테스트 후 cpu개수, period 정하기
-    //update container & run benchmark
-    // for(int cpu = 0; cpu < CORE; cpu++)
-    // {
-        // for(int period = 100000; period <= 1000000; period += 100000)
-        // {
-
-        // for(int cpu = 1; cpu < 2; cpu++)
-        // {
-
-            // for(int period = 1000000; period <= 1000000; period += 1000000)
-            // {
-
-                int cpu = 1; int period = 100000;
-            updateContainer(cpu, period, period/2);
-            runBenchTool(cpu, period, period/2);
-            saveRslt(cpu, period, period/2);
-        // }
-    // }
-
-    stopContainer();
-}    
 
 // stop container
 void Bench::stopContainer()
