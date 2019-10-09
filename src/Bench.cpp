@@ -8,12 +8,12 @@ using namespace std;
 void Bench::benchmark()
 {
     init();
-    cout << "name: " << this->NAME << " img: " << this->IMG << endl;
-    // runContainer();
-    // cpEnvToContainer();
+    // cout << "name: " << this->NAME << " img: " << this->IMG << endl;
+    runContainer();
+    cpEnvToContainer();
 
     //FIXME: 테스트 후 cpu개수, period 정하기
-    //update container & run benchmark
+    // update container & run benchmark
     // for(int cpu = 0; cpu < CORE; cpu++)
     // {
         // for(int period = 100000; period <= 1000000; period += 100000)
@@ -25,14 +25,14 @@ void Bench::benchmark()
             // for(int period = 1000000; period <= 1000000; period += 1000000)
             // {
 
-                // int cpu = 1; int period = 100000;
-            // updateContainer(cpu, period, period/2);
-            // runBenchTool(cpu, period, period/2);
-            // saveRslt(cpu, period, period/2);
+                int cpu = 1; int period = 100000;
+            updateContainer(cpu, period, period/2);
+            runBenchTool(cpu, period, period/2);
+            saveRslt(cpu, period, period/2);
         // }
     // }
 
-    // stopContainer();
+    stopContainer();
 }    
 
 
