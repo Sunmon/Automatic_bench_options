@@ -2,7 +2,7 @@
 
 도커 벤치마크 자동화 툴
 
-100ms단위로 100~1000ms period, cpu= 0 ~ 0~3까지 실행한 결과를 `${abo}/out/[bench]`에 저장합니다.
+100ms단위로 100 ~ 1000ms period, cpu= 0 ~ 3까지 실행한 결과를 `${abo}/out/[bench]`에 저장합니다.
 
 
 
@@ -18,7 +18,7 @@ $./abo [벤치마크 이름]
 ```
 벤치마크 실행 결과는 $abo/out에 벤치마크별 폴더 아래에 저장
 
-벤치마크별 실행방법 : 
+**벤치마크별 실행방법 : **
 
 - ./abo hpl            		 //hpl실행
 - ./abo httpd-server    //httpd를 실행할 수 있게 도커 데몬모드로 운영. 
@@ -42,12 +42,12 @@ $./abo [벤치마크 이름]
 빌드 방법 (g++ 기준) :
 
 ```
-$ g++ abo.cpp Bench.cpp [기타 벤치마크 전부.cpp] ./json/json.cpp
+$ g++ abo.cpp Bench.cpp [기타 벤치마크 전부.cpp] json.cpp
 ```
 
 예시:
 ```
-$ g++ abo.cpp Bench.cpp HPL.cpp Httpd-Client.cpp Httpd-Server.cpp ./json/json.cpp
+$ g++ abo.cpp Bench.cpp HPL.cpp Httpd-Client.cpp Httpd-Server.cpp json.cpp
 ```
 
 
@@ -69,7 +69,7 @@ $ g++ abo.cpp Bench.cpp HPL.cpp Httpd-Client.cpp Httpd-Server.cpp ./json/json.cp
 
 
 
-파일 경로나 이름같은거 바꾸고싶으면 `config.json`만 건드리면 됩니다. (소스 건드리거나 재빌드할필요 ㄴㄴ)
+파일 경로나 이름같은거 바꾸고싶으면 `config.json`만 건드리면 됩니다. (소스 건드리거나 재빌드, 컴파일할필요 ㄴㄴ)
 
 예) jmeter 실험 도메인을 건국대로 바꾸고 싶다? `config.json`의 *"server.IP"="konkuk.ac.kr"*로 수정
 
