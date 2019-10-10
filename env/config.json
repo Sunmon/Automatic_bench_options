@@ -16,5 +16,13 @@
         "users" : 10,
         "rampup" : 1,
         "threads" : 10
+    },
+
+    "MiniFE" :
+    {
+        "root" : ":/minife/ref/src",
+        "mpirun" : "mpirun --allow-run-as-root -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
+        "outputPath" : ":/minife/ref/src/output.yaml"
     }
+
 }
