@@ -1,0 +1,62 @@
+Mini-Application Name: miniFE
+Mini-Application Version: 2.0
+Global Run Parameters: 
+  dimensions: 
+    nx: 100
+    ny: 100
+    nz: 100
+  load_imbalance: 0
+  mv_overlap_comm_comp: 0 (no)
+  number of processors: 4
+  ScalarType: double
+  GlobalOrdinalType: int
+  LocalOrdinalType: int
+Platform: 
+  hostname: da009f64aa65
+  kernel name: 'Linux'
+  kernel release: '4.4.0-13-generic'
+  processor: 'unknown'
+Build: 
+  CXX: '/usr/bin/mpicxx'
+  compiler version: 'g++ (Debian 6.2.0-10) 6.2.0 20161027'
+  CXXFLAGS: '-O3 -g'
+  using MPI: yes
+Run Date/Time: 2019-10-10, 18-27-00
+Rows-per-proc Load Imbalance: 
+  Largest (from avg, %): 0
+  Std Dev (%): 0
+Matrix structure generation: 
+  Mat-struc-gen Time: 9.99225
+FE assembly: 
+  FE assembly Time: 36.6893
+Matrix attributes: 
+  Global Nrows: 1030301
+  Global NNZ: 27270901
+  Global Memory (GB): 0.312452
+  Pll Memory Overhead (MB): 0.471725
+  Rows per proc MIN: 252500
+  Rows per proc MAX: 262701
+  Rows per proc AVG: 257575
+  NNZ per proc MIN: 6682501
+  NNZ per proc MAX: 6954304
+  NNZ per proc AVG: 6.81773e+06
+CG solve: 
+  Iterations: 200
+  Final Resid Norm: 7.21345e-08
+  WAXPY Time: 0.710399
+  WAXPY Flops: 1.806e+09
+  WAXPY Mflops: 2542.23
+  DOT Time: 58.2813
+  DOT Flops: 8e+08
+  DOT Mflops: 13.7265
+  MATVEC Time: 83.6179
+  MATVEC Flops: 1.09629e+10
+  MATVEC Mflops: 131.107
+  Total: 
+    Total CG Time: 142.803
+    Total CG Flops: 1.35689e+10
+    Total CG Mflops: 95.0184
+  Time per iteration: 0.714015
+Global All-RSS (kB): 431160
+Global Max-RSS (kB): 109648
+Total Program Time: 201.299

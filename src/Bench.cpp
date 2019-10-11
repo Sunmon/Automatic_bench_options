@@ -17,6 +17,7 @@ void Bench::benchmark()
         for(int period = 100000; period <= 1000000; period += 100000)
         {
 
+            // int cpu = 1, period = 1000000;
             updateContainer(cpu, period, period/2);
             runBenchTool(cpu, period, period/2);
             saveRslt(cpu, period, period/2);
@@ -67,7 +68,7 @@ void Bench::makeDir(const std::string& dir)
 
 /** protected **/
 
-//초기화
+//runoption과 DOCKER, 기본 output 폴더 초기화
 void Bench::init()
 {
     this->runOption = " -dit --rm --name " + NAME + " " + IMG;
@@ -106,6 +107,7 @@ void Bench::initJson()
     reader.parse(jsonDir, config); // reader can also read strings
 }
 
+//runoption 더해서 실행
 void Bench::runContainer()
 {
     string run = DOCKER + "run " + runOption;

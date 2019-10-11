@@ -20,9 +20,10 @@ $./abo [벤치마크 이름]
 
 **벤치마크별 실행방법 : **
 
-- ./abo hpl            		 *# hpl실행*
-- ./abo httpd-server      *# httpd를 실행할 수 있게 도커 데몬모드로 운영.* 
-- ./abo httpd-client     *# jmeter실행. httpd-server와 연결 (서버가 열려있어야 함)*
+- ./abo hpl            		 //hpl실행
+- ./abo httpd-server    //httpd를 실행할 수 있게 도커 데몬모드로 운영. 
+- ./abo httpd-client     //jmeter실행. httpd-server와 연결 (서버가 열려있어야 함)
+- ./abo minife              //minife
 
 
 

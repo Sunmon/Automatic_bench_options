@@ -26,10 +26,10 @@ class Bench
         std::string DOCKER;                                                 // 도커 실행 옵션. "docker -H PORT" or "docker"
         std::string runOption;                                              // 도커 실행 옵션. " -dit --rm --name " + NAME + " " + IMG;
         std::string manVar[3];                                              // cpu옵션. manVar[0] = cpuset, manVar[1] = period, manVar[2] = bandwidth.
-        std::string outDir;                                                 // output이 저장되는 dir
+        std::string outDir;                                                 // 호스트에 output이 저장되는 dir
         const std::string CPUSET[4] = {"0", "0-1", "0-2", "0-3"};           //cpu 번호. "0", "0,2", "0,2,4", "0,2,4,6"일수도 있음
 
-        virtual void init();
+        virtual void init();                                                // runOption, DOCKER, outDir 초기화
         virtual void runBenchTool(int cpu, int period, int quota) = 0;      // 벤치마크 툴 돌리기. jemter, hpl 이런거
         virtual void cpEnvToContainer();                                    // 컨테이너 운영에 필요한 환경설정 파일 복사해오기
         virtual void saveRslt(int cpu, int period, int quota);              // 결과 호스트 컴퓨터에 저장하기
