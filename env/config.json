@@ -21,8 +21,15 @@
     "MiniFE" :
     {
         "root" : ":/minife/ref/src",
-        "mpirun" : "mpirun --allow-run-as-root -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
+        "mpirun" : "mpiexec --allow-run-as-root -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
         "outputPath" : ":/minife/ref/src/output.yaml"
+    },
+
+    "MiniAlb" :
+    {
+        "root" : ":/project/minife/ref/src",
+        "mpirun" : "mpiexec -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
+        "outputPath" : ":/project/minife/ref/src/output.yaml"
     }
 
 }
