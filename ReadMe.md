@@ -24,11 +24,13 @@ $./abo [벤치마크 이름]
 - ./abo httpd-server    //httpd를 실행할 수 있게 도커 데몬모드로 운영. 
 - ./abo httpd-client     //jmeter실행. httpd-server와 연결 (서버가 열려있어야 함)
 - ./abo minife              //minife
+- ./abo nginx-client        //nginx
 
 
 
 \* 만약 도커 실행할때 백그라운드에서도 돌아가도록 환경설정 옵션 바꿔놨으면 *httpd-server*는 따로 실행할 필요 없음!
 
+웹서버는 1.httpd-server 실행 (서버컴퓨터에서)) 2. 클라이언트(nginx-client , httpd-client)실행 (jmeter실행할 컴퓨터에서)
 
 
 ## Install
