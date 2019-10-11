@@ -5,6 +5,7 @@
 #include "Httpd-Server.h"
 #include "Httpd-Client.h"
 #include "MiniFE.h"
+#include "MiniAlb.h"
 #include <cstring>
 
 Bench* selectBench(std::string program)
@@ -14,6 +15,7 @@ Bench* selectBench(std::string program)
     else if(program == "httpd-client")  return new Httpd_Client;
     else if(program == "hpl")           return new HPL;
     else if(program == "minife")        return new MiniFE;
+    else if(program == "miniAlb")       return new MiniAlb;
 
     // 잘못된 프로그램 이름을 넣은 경우
     std::cout << "please check program name\n";
