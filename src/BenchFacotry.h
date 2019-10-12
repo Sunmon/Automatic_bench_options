@@ -7,6 +7,7 @@
 #include "MiniFE.h"
 #include "Nginx-Client.h"
 #include "MiniAlb.h"
+#include "HPCG.h"
 #include <cstring>
 
 Bench* selectBench(std::string program)
@@ -15,6 +16,7 @@ Bench* selectBench(std::string program)
     if(program == "httpd-server")       return new Httpd_Server;
     else if(program == "httpd-client")  return new Httpd_Client;
     else if(program == "hpl")           return new HPL;
+    else if(program == "hpcg")          return new HPCG;
     else if(program == "minife")        return new MiniFE;
     else if(program == "nginx-client")  return new Nginx_Client;
     else if(program == "miniAlb")       return new MiniAlb;

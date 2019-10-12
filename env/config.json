@@ -1,10 +1,18 @@
 {
     "HPL" :
     {
-        "root" : ":/AddedFiles/hpl-2.3/bin/x86_64",
-        "mpirun" : "mpirun --allow-run-as-root -np 4 xhpl",
+        "workdir" : ":/AddedFiles/hpl-2.3/bin/x86_64",
+        "mpirun" : "mpirun --allow-run-as-workdir -np 4 xhpl",
         "outputPath" : ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.out",
-        "HPL.dat" : "../env/HPL.dat"
+        "dat" : "../env/HPL_2.dat"
+    },
+
+    "HPCG" :
+    {
+        "workdir" : ":/AddedFiles/hpcg-3.1/bin",
+        "mpirun" : "mpirun --allow-run-as-root -np 4 xhpcg",
+        "outputPath" : ":/AddedFiles/hpcg-3.1/bin/{}",
+        "dat" : "../env/hpcg.dat"
     },
 
     "jmeter" : 
@@ -20,14 +28,14 @@
 
     "MiniFE" :
     {
-        "root" : ":/minife/ref/src",
-        "mpirun" : "mpiexec --allow-run-as-root -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
+        "workdir" : ":/minife/ref/src",
+        "mpirun" : "mpiexec --allow-run-as-workdir -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
         "outputPath" : ":/minife/ref/src/output.yaml"
     },
 
     "MiniAlb" :
     {
-        "root" : ":/project/minife/ref/src",
+        "workdir" : ":/project/minife/ref/src",
         "mpirun" : "mpiexec -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
         "outputPath" : ":/project/minife/ref/src/output.yaml"
     }

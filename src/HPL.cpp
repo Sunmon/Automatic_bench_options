@@ -11,9 +11,10 @@ void HPL::runBenchTool(int cpu, int period, int quota)
 //실험환경설정 컨테이너로 복사
 void HPL::cpEnvToContainer()
 {
-    string hpldat = config["HPL"]["HPL.dat"].asString();
-    string hplroot = config["HPL"]["root"].asString();
-    string cp = DOCKER + "cp " + hpldat + " " + NAME + hplroot; 
+    string hpldat = config["HPL"]["dat"].asString();
+    string hplroot = config["HPL"]["workdir"].asString();
+    string cp = DOCKER + "cp " + hpldat + " " + NAME + hplroot + "/HPL.dat"; 
+    cout << cp << endl;
     Bench::command(cp);
 }
 

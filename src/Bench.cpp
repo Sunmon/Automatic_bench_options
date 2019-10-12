@@ -21,6 +21,7 @@ void Bench::benchmark()
             updateContainer(cpu, period, period/2);
             runBenchTool(cpu, period, period/2);
             saveRslt(cpu, period, period/2);
+
         }
     }
 
@@ -93,6 +94,16 @@ void Bench::cpEnvToContainer()
 void Bench::saveRslt(int cpu, int period, int quota)
 {
     return;
+}
+
+
+//TODO:  cpEnvToContainer 변수 있게 수정하기
+void Bench::cpEnvToContainer(string data, string dest_dir)
+{
+   string _data =  config[NAME][data].asString();
+   string _dir = config[NAME][dest_dir].asString();
+   string cp = DOCKER + "cp " + _data + " " + NAME + dest_dir;
+   Bench:: command(cp);
 }
 
 
