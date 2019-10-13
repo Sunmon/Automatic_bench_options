@@ -27,9 +27,7 @@
 
     "jmeter" : 
     {
-        // "jmeterPath" : "~/Desktop/apache-jmeter-5.1.1/bin/jmeter",
         "workdir" : "~/Desktop/apache-jmeter-5.1.1/bin/jmeter",
-        // "jmxPath" : "../env/jmeter-set.jmx",
         "data_host" : "../env/jmeter-set.jmx",
         "server.IP" : "192.168.0.9",
         "server.port" : "8080",
