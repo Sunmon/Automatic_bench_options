@@ -6,8 +6,7 @@ class HPL : public Bench
 {
 
     private: 
-        void saveRslt(int cpu, int period, int quota);
-        void initContainer() override;
+        void init(std::string _json = "null") override;
         void runBenchTool(int cpu, int period, int quota) override;
 
     public:

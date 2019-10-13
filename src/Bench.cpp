@@ -70,7 +70,7 @@ void Bench::makeDir(const std::string& dir)
 /** protected **/
 
 //runoption과 DOCKER, 기본 output 폴더 초기화
-void Bench::init()
+void Bench::init(std::string _json)
 {
     this->runOption = " -dit --rm --name " + NAME + " " + IMG;
     this->DOCKER = "docker ";
@@ -80,21 +80,14 @@ void Bench::init()
     makeDir(outDir);
 
     //json 환경파일 가져오기
-    initJson();
+    initJson(_json);
 }
 
-// void Bench::initContainer()
-// {
-//     return;
-// }
 
-
-//config.json파일의 '_json'를 이용하여 컨테이너 초기화.
-void Bench::initContainer(std::string _json = "")
+//config.json파일의 내용을  이용하여 컨테이너 초기화.
+void Bench::initContainer()
 {
-    //해당 컨테이너 설정만 읽어오기
-    if(_json == "") return;
-    config = config.get(_json, "null");
+    if(config == "null") return;
 
     //copy data file into the container
     string data_host = config.get("data_host", "null").asString();
@@ -103,27 +96,37 @@ void Bench::initContainer(std::string _json = "")
     {
         string cp = this->DOCKER + " cp " + data_host + " " + NAME + data_container;
         Bench::command(cp);
-
     }
 }
 
 // 컨테이너내에 저장된 결과파일을 호스트 컴퓨터로 복사
 void Bench::saveRslt(int cpu, int period, int quota)
 {
-    return;
+    //파일이름에 쓸 변수
+    string s_cpu = CPUSET[cpu];
+    string s_period = to_string(period/1000);
+    string s_quota = to_string(quota/1000);
+
+    //컨테이너에서 호스트로 결과값 복사
+    string result = this->NAME + config.get("output_container", "null").asString();
+    string cp =  this->DOCKER +  result + " " + outDir + 
+                        "cpus" + s_cpu + "_per" + s_period + "_quo" + s_quota;
+
+    command(cp);
 }
 
 /** private **/
 
 //config.json 파일 읽어서 config 변수에 저장
-void Bench::initJson()
+void Bench::initJson(std::string _json)
 {
     //각종 설정을 모아둔 json파일 읽어오기
     ifstream jsonDir("../env/config.json");
     Json::Reader reader;
     reader.parse(jsonDir, config); // reader can also read strings
 
-
+    //해당 _json부분만 참조하기
+    config = config.get(_json, "null");
 }
 
 //runoption 더해서 실행
