@@ -1,4 +1,5 @@
 //MiniAlb benchmark
+//NOTE: 이 클래스 안 쓴다.
 #pragma once
 #include "Bench.h"
 
