@@ -8,30 +8,21 @@ void HPCG::init(std::string _json)
    Bench::init("hpcg");
 }
 
+
+//TODO: 얘 잘 돌아가는지 TEST 필요
 void HPCG::runBenchTool(int cpu, int period, int quota)
 {
+    //벤치마크 실행
     string mpirun = config.get("mpirun","").asString();
     string exec = "docker exec " + NAME + " " + mpirun;
     Bench::command(exec);
+
+    //NOTE: 결과물이 여러개가 나와서, 그중에 가장 최근꺼 하나민 선택하여 이름 바꾸기
+    string select = "docker exec " + NAME + " ls -tr | tail -1 ";
+    string mv = "| xargs -I {} docker exec " + NAME + "mv {} hpcg.out";
+    string setout = select + mv;
+    Bench::command(setout);
 }
-
-
-//실험결과를 호스트 컴퓨터로 복사
-void HPCG::saveRslt(int cpu, int period, int quota)
-{
-
-    string s_cpu = CPUSET[cpu];
-    string s_period = to_string(period/1000);
-    string s_quota = to_string(quota/1000);
-    // docker exec NAME ls -tr | tail -1 | xargs -I {} docker cp NAME:/AddedFiles/hpcg-3.1/bin/{}"
-    string select = "docker exec " + NAME + " ls -tr | tail -1 | xargs -I {} ";
-    string result_from = NAME + config.get("output_container","").asString();
-    string result_to = outDir + "/cpus" + s_cpu + "_per" + s_period + "_quo" + s_quota;
-    string getOutput =  select + "docker cp " + result_from + " " + result_to;
-
-    command(getOutput);
-}
-
 
 
 HPCG::HPCG() : Bench("blackmilk274/hpcg", "hpcg")

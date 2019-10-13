@@ -1,15 +1,16 @@
 #include "MiniFE.h"
 using namespace std;
 
-void MiniFE::init()
+void MiniFE::init(string _json)
 {
-    Bench::init();
+    Bench::init("minife");
     this->runOption = "-w /minife/ref/src --entrypoint=/bin/bash " + runOption;
 }
 
 void MiniFE::runBenchTool(int cpu, int period, int quota)
 {
-    string mpirun = config["MiniFE"]["mpirun"].asString();
+    string mpirun = config.get("mpirun", "null").asString();
+    // string mpirun = config["MiniFE"]["mpirun"].asString();
     string exec = "docker exec " + NAME + " " + mpirun;
     Bench::command(exec);
 
