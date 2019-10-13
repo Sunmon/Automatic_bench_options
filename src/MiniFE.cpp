@@ -7,7 +7,7 @@ void MiniFE::init(string _json)
     this->runOption = "-w /minife/ref/src --entrypoint=/bin/bash " + runOption;
 }
 
-void MiniFE::initContainer(){
+void MiniFE::initContainer(){   //do nothing
 }
 
 void MiniFE::runBenchTool(int cpu, int period, int quota)
