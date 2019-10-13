@@ -12,7 +12,7 @@ void HPCG::runBenchTool(int cpu, int period, int quota)
 }
 
 //실험환경설정 컨테이너로 복사
-void HPCG::cpEnvToContainer()
+void HPCG::initContainer()
 {
     string dat = config["HPCG"]["dat"].asString();
     string dir = config["HPCG"]["workdir"].asString();

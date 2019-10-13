@@ -7,7 +7,7 @@ class HPL : public Bench
 
     private: 
         void saveRslt(int cpu, int period, int quota);
-        void cpEnvToContainer() override;
+        void initContainer() override;
         void runBenchTool(int cpu, int period, int quota) override;
 
     public:

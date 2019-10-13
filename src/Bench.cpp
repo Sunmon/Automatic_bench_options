@@ -9,7 +9,7 @@ void Bench::benchmark()
 {
     init();
     runContainer();
-    cpEnvToContainer();
+    initContainer();
 
     // update container & run benchmark
     for(int cpu = 0; cpu < CORE; cpu++)
@@ -85,7 +85,7 @@ void Bench::init()
 
 
 //호스트나 인터넷에 있는 환경설정을 컨테이너 내로 복사
-void Bench::cpEnvToContainer()
+void Bench::initContainer()
 {
     return;
 }
@@ -97,8 +97,8 @@ void Bench::saveRslt(int cpu, int period, int quota)
 }
 
 
-//TODO:  cpEnvToContainer 변수 있게 수정하기
-void Bench::cpEnvToContainer(string data, string dest_dir)
+//TODO:  initContainer 변수 있게 수정하기
+void Bench::initContainer(string data, string dest_dir)
 {
    string _data =  config[NAME][data].asString();
    string _dir = config[NAME][dest_dir].asString();
@@ -121,7 +121,7 @@ void Bench::initJson()
 //runoption 더해서 실행
 void Bench::runContainer()
 {
-    string run = DOCKER + "run " + runOption;
+    string run = this->DOCKER + " run " + this->runOption;
     command(run);
 }
 
