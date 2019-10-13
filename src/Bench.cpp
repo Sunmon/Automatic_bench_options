@@ -83,17 +83,18 @@ void Bench::init()
     initJson();
 }
 
-void Bench::initContainer()
-{
-    return;
-}
+// void Bench::initContainer()
+// {
+//     return;
+// }
 
 
 //config.json파일의 '_json'를 이용하여 컨테이너 초기화.
-void Bench::initContainer(std::string _json)
+void Bench::initContainer(std::string _json = "")
 {
     //해당 컨테이너 설정만 읽어오기
-    config = config.get(_json, "");
+    if(_json == "") return;
+    config = config.get(_json, "null");
 
     //copy data file into the container
     string data_host = config.get("data_host", "null").asString();
@@ -111,16 +112,6 @@ void Bench::saveRslt(int cpu, int period, int quota)
 {
     return;
 }
-
-//FIXME: 삭제
-// void Bench::initContainer(string data, string dest_dir)
-// {
-//    string _data =  config[NAME][data].asString();
-//    string _dir = config[NAME][dest_dir].asString();
-//    string cp = DOCKER + "cp " + _data + " " + NAME + dest_dir;
-//    Bench:: command(cp);
-// }
-
 
 /** private **/
 

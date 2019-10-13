@@ -45,8 +45,8 @@ protected:
 
     virtual void init();                                           // runOption, DOCKER, outDir 초기화
     virtual void runBenchTool(int cpu, int period, int quota) = 0; // 벤치마크 툴 돌리기. jemter, hpl 이런거
-    virtual void initContainer();
-    virtual void initContainer(std::string _json);                               // 컨테이너 운영에 필요한 환경설정 파일 복사해오기
+    // virtual void initContainer();
+    virtual void initContainer(std::string _json = "");                               // 컨테이너 운영에 필요한 환경설정 파일 복사해오기
     virtual void saveRslt(int cpu, int period, int quota); // 결과 호스트 컴퓨터에 저장하기
 
 public:
