@@ -22,7 +22,7 @@
     {
         "workdir" : ":/minife/ref/src",
         "mpirun" : "mpiexec --allow-run-as-root -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
-        "outputPath" : ":/minife/ref/src/output.yaml"
+        "output_container" : ":/minife/ref/src/minife.out"
     },
 
     "jmeter" : 
