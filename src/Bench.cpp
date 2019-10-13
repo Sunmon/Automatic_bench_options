@@ -76,7 +76,7 @@ void Bench::init(std::string _json)
     this->DOCKER = "docker ";
 
     //기본 output 폴더 만들기
-    outDir = "../out/"+NAME+"/";
+    outDir = "../out/"+NAME;
     makeDir(outDir);
 
     //json 환경파일 가져오기
@@ -108,9 +108,9 @@ void Bench::saveRslt(int cpu, int period, int quota)
     string s_quota = to_string(quota/1000);
 
     //컨테이너에서 호스트로 결과값 복사
-    string result = this->NAME + config.get("output_container", "null").asString();
-    string cp =  this->DOCKER +  result + " " + outDir + 
-                        "cpus" + s_cpu + "_per" + s_period + "_quo" + s_quota;
+    string result_from = this->NAME + config.get("output_container", "null").asString();
+    string result_to = outDir + "/cpus" + s_cpu + "_per" + s_period + "_quo" + s_quota;
+    string cp =  this->DOCKER +  " cp " + result_from + " " + result_to;
 
     command(cp);
 }
