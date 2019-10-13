@@ -9,7 +9,7 @@ void MiniAlb::init()
 
 }
 
-void MiniAlb::cpEnvToContainer()
+void MiniAlb::initContainer()
 {
     string make = "docker exec " + NAME + " make miniFE.x";
     Bench::command(make);

@@ -83,11 +83,27 @@ void Bench::init()
     initJson();
 }
 
-
-//호스트나 인터넷에 있는 환경설정을 컨테이너 내로 복사
 void Bench::initContainer()
 {
     return;
+}
+
+
+//config.json파일의 '_json'를 이용하여 컨테이너 초기화.
+void Bench::initContainer(std::string _json)
+{
+    //해당 컨테이너 설정만 읽어오기
+    config = config.get(_json, "");
+
+    //copy data file into the container
+    string data_host = config.get("data_host", "null").asString();
+    string data_container = config.get("data_container", "null").asString();
+    if(data_host != "null" && data_container != "null")
+    {
+        string cp = this->DOCKER + " cp " + data_host + " " + NAME + data_container;
+        Bench::command(cp);
+
+    }
 }
 
 // 컨테이너내에 저장된 결과파일을 호스트 컴퓨터로 복사
@@ -96,15 +112,14 @@ void Bench::saveRslt(int cpu, int period, int quota)
     return;
 }
 
-
-//TODO:  initContainer 변수 있게 수정하기
-void Bench::initContainer(string data, string dest_dir)
-{
-   string _data =  config[NAME][data].asString();
-   string _dir = config[NAME][dest_dir].asString();
-   string cp = DOCKER + "cp " + _data + " " + NAME + dest_dir;
-   Bench:: command(cp);
-}
+//FIXME: 삭제
+// void Bench::initContainer(string data, string dest_dir)
+// {
+//    string _data =  config[NAME][data].asString();
+//    string _dir = config[NAME][dest_dir].asString();
+//    string cp = DOCKER + "cp " + _data + " " + NAME + dest_dir;
+//    Bench:: command(cp);
+// }
 
 
 /** private **/
@@ -116,6 +131,8 @@ void Bench::initJson()
     ifstream jsonDir("../env/config.json");
     Json::Reader reader;
     reader.parse(jsonDir, config); // reader can also read strings
+
+
 }
 
 //runoption 더해서 실행
@@ -129,20 +146,20 @@ void Bench::runContainer()
 // set docker cpu option
 void Bench::updateContainer(int cpu, int period, int quota)
 {
-    manVar[CPUS] = CPUSET[cpu];
-    manVar[PER] = to_string(period);
-    manVar[QUO] = to_string(quota);
+    string s_cpu = CPUSET[cpu];
+    string s_period = to_string(period);
+    string s_quota = to_string(quota);
 
     string update = DOCKER +
-        "update --cpuset-cpus=" + manVar[CPUS] + " " +
-        "--cpu-period=" + manVar[PER] + " " +
-        "--cpu-quota=" + manVar[QUO] + " " + NAME;
+        " update --cpuset-cpus=" + s_cpu +
+        " --cpu-period=" + s_period +
+        " --cpu-quota=" + s_quota + " " + NAME;
     command(update);
 }
 
 // stop container
 void Bench::stopContainer()
 {
-    string stop = DOCKER+ "stop " + this->NAME;
+    string stop = DOCKER + " stop " + this->NAME;
     command(stop);
 }

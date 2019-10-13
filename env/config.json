@@ -3,16 +3,19 @@
     {
         "workdir" : ":/AddedFiles/hpl-2.3/bin/x86_64",
         "mpirun" : "mpirun --allow-run-as-workdir -np 4 xhpl",
-        "outputPath" : ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.out",
-        "dat" : "../env/HPL_2.dat"
+        "data_host" : "../env/HPL_2.dat",
+        "data_container" : ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat",
+        "output_container" : ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.out"
     },
 
     "HPCG" :
     {
         "workdir" : ":/AddedFiles/hpcg-3.1/bin",
         "mpirun" : "mpirun --allow-run-as-root -np 4 xhpcg",
-        "outputPath" : ":/AddedFiles/hpcg-3.1/bin/{}",
-        "dat" : "../env/hpcg.dat"
+        "data_host" : "../env/hpcg.dat",
+        "data_container" : ":/AddedFiles/hpcg-3.1/bin/hpcg.dat", 
+        "output_container" : ":/AddedFiles/hpcg-3.1/bin/{}"
+
     },
 
     "jmeter" : 
