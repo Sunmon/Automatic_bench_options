@@ -1,11 +1,11 @@
 //hpcg
 #pragma once
-#include "Bench.h"
+#include "MPI.h"
 
-class HPCG: public Bench
+class HPCG: virtual public MPI
 {
     private: 
-        void init(std::string _json = "null") override;
+        // void init() override;
         void runBenchTool(int cpu, int period, int quota) override;
 
     public:

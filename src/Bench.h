@@ -33,7 +33,6 @@ private:
     virtual void runContainer();                                  // 컨테이너 실행
     virtual void updateContainer(int cpu, int period, int quota); // 컨테이너 cpu 옵션 변경
     virtual void stopContainer();                                 // 컨테이너 stop
-    void initJson(std::string _json);
 
 protected:
     Json::Value config;                                         //json에서 읽어온 환경설정을 저장하는 변수
@@ -42,12 +41,14 @@ protected:
     std::string DOCKER;                                       // 도커 실행 옵션. "docker -H PORT" or "docker"
     std::string runOption;                                    // 도커 실행 옵션. " -dit --rm --name " + NAME + " " + IMG;
     std::string outDir;                                       // 호스트에 output이 저장되는 dir
+    std::string json;                                    //config 데이터 이름
     const std::string CPUSET[4] = {"0", "0-1", "0-2", "0-3"}; //cpu 번호. "0", "0,2", "0,2,4", "0,2,4,6"일수도 있음
 
-    virtual void init(std::string _json = "null");                 // runOption, DOCKER, outDir 초기화
+    virtual void init() = 0;                 // runOption, DOCKER, outDir 초기화
     virtual void runBenchTool(int cpu, int period, int quota) = 0; // 벤치마크 툴 돌리기. jemter, hpl 이런거
-    virtual void initContainer();                               // 컨테이너 운영에 필요한 환경설정 파일 복사해오기
-    virtual void saveRslt(int cpu, int period, int quota); // 결과 호스트 컴퓨터에 저장하기
+    virtual void initContainer() = 0;                               // 컨테이너 운영에 필요한 환경설정 파일 복사해오기
+    virtual void saveRslt(int cpu, int period, int quota) = 0; // 결과 호스트 컴퓨터에 저장하기
+    virtual void initJson(std::string _json);
 
 public:
     virtual void benchmark(); //벤치마크 실행 함수

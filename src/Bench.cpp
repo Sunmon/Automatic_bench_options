@@ -45,6 +45,10 @@ Bench::Bench(const string& img, const string& name)
 {
     this->IMG = img;
     this->NAME =  name;
+    // this->json = _json;
+
+    // init();
+
 }
 
 Bench::~Bench(){
@@ -70,50 +74,50 @@ void Bench::makeDir(const std::string& dir)
 /** protected **/
 
 //runoption과 DOCKER, 기본 output 폴더 초기화
-void Bench::init(std::string _json)
-{
-    this->runOption = " -dit --rm --name " + NAME + " " + IMG;
-    this->DOCKER = "docker ";
+// void Bench::init()
+// {
+//     this->runOption = " -dit --rm --name " + NAME + " " + IMG;
+//     this->DOCKER = "docker ";
 
-    //기본 output 폴더 만들기
-    outDir = "../out/"+NAME;
-    makeDir(outDir);
+//     //기본 output 폴더 만들기
+//     outDir = "../out/"+NAME;
+//     makeDir(outDir);
 
-    //json 환경파일 가져오기
-    initJson(_json);
-}
+//     //json 환경파일 가져오기
+//     initJson(this->config_name);
+// }
 
 
 //config.json파일의 내용을  이용하여 컨테이너 초기화.
-void Bench::initContainer()
-{
-    if(config == "null") return;
+// void Bench::initContainer()
+// {
+//     if(config == "null") return;
 
-    //copy data file into the container
-    string data_host = config.get("data_host", "null").asString();
-    string data_container = config.get("data_container", "null").asString();
-    if(data_host != "null" && data_container != "null")
-    {
-        string cp = this->DOCKER + " cp " + data_host + " " + NAME + data_container;
-        Bench::command(cp);
-    }
-}
+//     //copy data file into the container
+//     string data_host = config.get("data_host", "null").asString();
+//     string data_container = config.get("data_container", "null").asString();
+//     if(data_host != "null" && data_container != "null")
+//     {
+//         string cp = this->DOCKER + " cp " + data_host + " " + NAME + data_container;
+//         Bench::command(cp);
+//     }
+// }
 
 // 컨테이너내에 저장된 결과파일을 호스트 컴퓨터로 복사
-void Bench::saveRslt(int cpu, int period, int quota)
-{
-    //파일이름에 쓸 변수
-    string s_cpu = CPUSET[cpu];
-    string s_period = to_string(period/1000);
-    string s_quota = to_string(quota/1000);
+// void Bench::saveRslt(int cpu, int period, int quota)
+// {
+//     //파일이름에 쓸 변수
+//     string s_cpu = CPUSET[cpu];
+//     string s_period = to_string(period/1000);
+//     string s_quota = to_string(quota/1000);
 
-    //컨테이너에서 호스트로 결과값 복사
-    string result_from = this->NAME + config.get("output_container", "null").asString();
-    string result_to = outDir + "/cpus" + s_cpu + "_per" + s_period + "_quo" + s_quota;
-    string cp =  this->DOCKER +  " cp " + result_from + " " + result_to;
+//     //컨테이너에서 호스트로 결과값 복사
+//     string result_from = this->NAME + config.get("output_container", "null").asString();
+//     string result_to = outDir + "/cpus" + s_cpu + "_per" + s_period + "_quo" + s_quota;
+//     string cp =  this->DOCKER +  " cp " + result_from + " " + result_to;
 
-    command(cp);
-}
+//     command(cp);
+// }
 
 /** private **/
 

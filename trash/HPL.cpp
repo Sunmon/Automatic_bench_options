@@ -9,7 +9,7 @@ void HPL::runBenchTool(int cpu, int period, int quota)
 }
 
 
-void HPL::init(string _json)
+void HPL::init()
 {
     Bench::init("hpl");
 }
