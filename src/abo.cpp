@@ -8,7 +8,7 @@
  * EXAMPLE: ./abo hpl , ./abo httpd-server, ./abo httpd-client
  **/
 
-#include "BenchFacotry.h"
+#include "include/BenchFacotry.h"
 using namespace std;
 
 void testingjson()
@@ -32,12 +32,12 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    testingjson();
+    // testingjson();
 
     // 프로그램 실행
-    // string program = string(argv[1]);
-    // Bench* bench = selectBench(program);
+    string program = string(argv[1]);
+    Bench* bench = selectBench(program);
 
 
-    // bench->benchmark();
+    bench->benchmark();
 }

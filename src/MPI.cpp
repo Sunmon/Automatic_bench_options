@@ -1,4 +1,4 @@
-#include "MPI.h"
+#include "include/MPI.h"
 using namespace std;
 //runoption과 DOCKER, 기본 output 폴더 초기화
 // void MPI::init()
@@ -25,6 +25,10 @@ void MPI::init()
 
     //json 환경파일 가져오기
     Bench::initJson(this->NAME);
+    
+    //runoption이 있으면 가져오기
+    // string opt = config.get("run_option", "null").asString();
+    // if(opt != "null") this->runOption = opt + this->runOption;
 }
 
 

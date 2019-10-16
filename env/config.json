@@ -2,7 +2,7 @@
     "hpl" :
     {
         "workdir" : ":/AddedFiles/hpl-2.3/bin/x86_64",
-        "mpirun" : "mpirun --allow-run-as-workdir -np 4 xhpl",
+        "mpirun" : "mpirun --allow-run-as-root -np 4 xhpl",
         "data_host" : "../env/HPL_2.dat",
         "data_container" : ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.dat",
         "output_container" : ":/AddedFiles/hpl-2.3/bin/x86_64/HPL.out"
@@ -22,7 +22,8 @@
     {
         "workdir" : ":/minife/ref/src",
         "mpirun" : "mpiexec --allow-run-as-root -np 4 ./miniFE.x -nx 100 -ny 100 -nz 100",
-        "output_container" : ":/minife/ref/src/minife.out"
+        "output_container" : ":/minife/ref/src/minife.out",
+        "run_option" : "-w /minife/ref/src --entrypoint=/bin/bash "
     },
 
     "jmeter" : 

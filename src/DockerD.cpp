@@ -1,4 +1,4 @@
-#include "DockerD.h"
+#include "include/DockerD.h"
 using namespace std;
 
 
@@ -13,11 +13,11 @@ void DockerD::runBenchTool(int cpu, int period, int quota){
     //Bench::runBenchTool이 순수 가상함수라서 자리 채울뿐
 }
 
-void init(){//do nothing
+void DockerD::init(){//do nothing
 }                 // runOption, DOCKER, outDir 초기화
-void initContainer(){//do nothing
+void DockerD::initContainer(){//do nothing
 }                               // 컨테이너 운영에 필요한 환경설정 파일 복사해오기
-void saveRslt(int cpu, int period, int quota){//do nothing
+void DockerD::saveRslt(int cpu, int period, int quota){//do nothing
 }
 
 DockerD::DockerD() :Bench("DockerD", "DockerD")

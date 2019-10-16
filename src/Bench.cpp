@@ -1,5 +1,5 @@
 //Bench.h 구현 클래스
-#include "Bench.h"
+#include "include/Bench.h"
 using namespace std;
 
 
@@ -12,18 +12,18 @@ void Bench::benchmark()
     initContainer();
 
     // update container & run benchmark
-    for(int cpu = 0; cpu < CORE; cpu++)
-    {
-        for(int period = 100000; period <= 1000000; period += 100000)
-        {
+    // for(int cpu = 0; cpu < CORE; cpu++)
+    // {
+        // for(int period = 100000; period <= 1000000; period += 100000)
+        // {
 
-            // int cpu = 1, period = 1000000;
+            int cpu = 1, period = 1000000;
             updateContainer(cpu, period, period/2);
             runBenchTool(cpu, period, period/2);
             saveRslt(cpu, period, period/2);
 
-        }
-    }
+        // }
+    // }
 
     stopContainer();
 }    
@@ -161,3 +161,5 @@ void Bench::stopContainer()
     string stop = DOCKER + " stop " + this->NAME;
     command(stop);
 }
+
+

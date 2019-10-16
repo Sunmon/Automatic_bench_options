@@ -23,7 +23,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
-#include "json/json.h"
+#include "../json/json.h"
 
 class Bench
 {
@@ -60,4 +60,6 @@ public:
     Bench();
     Bench(const std::string &img, const std::string &name); //img, name 초기화하는 생성자
     virtual ~Bench();
+    // void setRunOption(std::string runOpt);
+
 };

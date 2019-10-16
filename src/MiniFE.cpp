@@ -1,4 +1,4 @@
-#include "MiniFE.h"
+#include "include/MiniFE.h"
 using namespace std;
 
 void MiniFE::init()
